@@ -43,5 +43,17 @@
   "settings": "Configuración",
   "@settings": {
     "description": "Título de la página de configuración y texto del botón"
+  },
+  "language": "Idioma",
+  "@language": {
+    "description": "Etiqueta de selección de idioma"
+  },
+  "languageEnglish": "Inglés",
+  "@languageEnglish": {
+    "description": "Opción de idioma inglés"
+  },
+  "languageSpanish": "Español",
+  "@languageSpanish": {
+    "description": "Opción de idioma español"
   }
 }
