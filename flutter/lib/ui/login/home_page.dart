@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phone_finder/state/login/login_cubit.dart';
-import 'package:phone_finder/state/login/login_state.dart';
 import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:phone_finder/state/login/logout_state.dart';
 
@@ -25,10 +23,10 @@ class HomePage extends StatelessWidget {
             child: Column(
                 children: [
                   ElevatedButton(
-                  onPressed: state is LogoutIdle
+                  onPressed: state is LogoutRequested
                       ? null
                       : () {
-                          // context.read<LogoutCubit>().logout(user);
+                          context.read<LogoutCubit>().logout();
                         },
                   child: state is LogoutRequested
                       ? const CircularProgressIndicator()
