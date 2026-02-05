@@ -7,10 +7,12 @@ import 'package:phone_finder/data/login/login_repository.dart';
 import 'package:phone_finder/data/login/login_repository_impl.dart';
 import 'package:phone_finder/data/settings/locale_storage.dart';
 import 'package:phone_finder/data/settings/theme_storage.dart';
+import 'package:phone_finder/data/storage/shared_preferences_impl.dart';
 import 'package:phone_finder/domain/settings/locale_repository.dart';
 import 'package:phone_finder/domain/settings/theme_repository.dart';
 import 'package:phone_finder/domain/settings/locale_usecase.dart';
 import 'package:phone_finder/domain/settings/theme_usecase.dart';
+import 'package:phone_finder/domain/storage/preferences_repository.dart';
 import 'package:phone_finder/domain/router/router_usecase.dart';
 import 'package:phone_finder/domain/login/login_usecase.dart';
 import 'package:phone_finder/domain/login/logout_usecase.dart';
@@ -34,12 +36,13 @@ void main() async {
   usePathUrlStrategy();
 
   final prefs = await SharedPreferences.getInstance();
+  final PreferencesRepository preferencesRepository = SharedPreferencesImpl(prefs);
   
   final api = AuthApi();
   
-  final LocaleRepository localeRepository = LocaleStorageImpl(prefs);
-  final ThemeRepository themeRepository = ThemeStorageImpl(prefs);
-  final LoginRepository loginRepository = LoginRepositoryImpl(api, prefs);
+  final LocaleRepository localeRepository = LocaleStorageImpl(preferencesRepository);
+  final ThemeRepository themeRepository = ThemeStorageImpl(preferencesRepository);
+  final LoginRepository loginRepository = LoginRepositoryImpl(api, preferencesRepository);
   
   final loginUseCase = LoginUseCase(loginRepository);
   final logoutUseCase = LogoutUseCase(loginRepository);
