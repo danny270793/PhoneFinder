@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phone_finder/domain/auth/login_usecase.dart';
+import 'package:phone_finder/domain/login/login_usecase.dart';
 import 'package:phone_finder/state/login/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
