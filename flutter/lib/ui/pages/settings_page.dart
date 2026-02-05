@@ -148,14 +148,23 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(title: Text(l10n.settings)),
       body: BlocBuilder<LocaleCubit, LocaleState>(
         builder: (context, localeState) {
-          final currentLanguageCode =
-              context.read<LocaleCubit>().currentLocale.languageCode;
-          final currentLanguageNative = _getLanguageNativeName(currentLanguageCode);
+          final currentLanguageCode = context
+              .read<LocaleCubit>()
+              .currentLocale
+              .languageCode;
+          final currentLanguageNative = _getLanguageNativeName(
+            currentLanguageCode,
+          );
 
           return BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, themeState) {
-              final currentThemeMode = context.read<ThemeCubit>().currentThemeMode;
-              final currentThemeName = _getThemeModeName(currentThemeMode, l10n);
+              final currentThemeMode = context
+                  .read<ThemeCubit>()
+                  .currentThemeMode;
+              final currentThemeName = _getThemeModeName(
+                currentThemeMode,
+                l10n,
+              );
               final currentThemeIcon = _getThemeModeIcon(currentThemeMode);
 
               return ListView(
