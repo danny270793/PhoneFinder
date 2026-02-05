@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_finder/l10n/app_localizations.dart';
 import 'package:phone_finder/state/login/login_cubit.dart';
 import 'package:phone_finder/state/login/login_state.dart';
 import 'package:phone_finder/state/router/router_cubit.dart';
@@ -14,8 +15,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(title: Text(l10n.login)),
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginError) {
@@ -31,8 +34,22 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                TextField(controller: emailController),
-                TextField(controller: passwordController, obscureText: true),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: l10n.email,
+                    hintText: l10n.emailHint,
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: l10n.password,
+                    hintText: l10n.passwordHint,
+                  ),
+                ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: state is LoginRequested
@@ -45,7 +62,7 @@ class LoginPage extends StatelessWidget {
                         },
                   child: state is LoginRequested
                       ? const CircularProgressIndicator()
-                      : const Text('Login'),
+                      : Text(l10n.login),
                 ),
               ],
             ),
