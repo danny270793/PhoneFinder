@@ -8,10 +8,14 @@ import 'package:phone_finder/state/router/router_state.dart';
 import 'package:phone_finder/ui/pages/error_page.dart';
 import 'package:phone_finder/ui/pages/home_page.dart';
 import 'package:phone_finder/ui/pages/login_page.dart';
+import 'package:phone_finder/ui/pages/settings_page.dart';
 import 'package:phone_finder/ui/pages/splash_page.dart';
 
 class AppRoutes {
-  static const List<String> protectedRoutes = [HomePage.routeName];
+  static const List<String> protectedRoutes = [
+    HomePage.routeName,
+    SettingsPage.routeName,
+  ];
 
   static const List<String> publicRoutes = [LoginPage.routeName];
 
@@ -61,6 +65,10 @@ class AppRoutes {
     GoRoute(
       path: HomePage.routeName,
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: SettingsPage.routeName,
+      builder: (context, state) => const SettingsPage(),
     ),
     GoRoute(
       path: ErrorPage.routeName,
