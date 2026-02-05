@@ -18,4 +18,7 @@ class AuthApi {
       refreshToken: 'refreshToken',
     );
   }
+  Future<void> logout(User user) async {
+    await Future.delayed(const Duration(seconds: 1));
+  }
 }
