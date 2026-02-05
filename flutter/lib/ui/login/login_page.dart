@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_finder/state/login/login_cubit.dart';
 import 'package:phone_finder/state/login/login_state.dart';
+import 'package:phone_finder/ui/login/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -18,6 +19,8 @@ class LoginPage extends StatelessWidget {
           if (state is LoginError) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));
+          } else if (state is LoginSuccess) {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
           }
         },
         builder: (context, state) {
@@ -32,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: state is LoginIdle
+                  onPressed: state is LoginRequested
                       ? null
                       : () {
                           context.read<LoginCubit>().login(
