@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final prefs = await SharedPreferences.getInstance();
   final storage = LoginStorage(prefs);
   final api = AuthApi();
@@ -24,7 +24,7 @@ void main() async {
   final routerUseCase = RouterUseCase(repo);
 
   final routerCubit = RouterCubit(routerUseCase);
-  
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -47,12 +47,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter(routerCubit),
       title: 'Phone Finder',
-      theme: ThemeData.light(
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ),
+      theme: ThemeData.light(useMaterial3: true),
+      darkTheme: ThemeData.dark(useMaterial3: true),
     );
   }
 }
