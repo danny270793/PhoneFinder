@@ -6,6 +6,7 @@ import 'package:phone_finder/data/login/login_api.dart';
 import 'package:phone_finder/data/login/login_repository_impl.dart';
 import 'package:phone_finder/data/login/login_storage.dart';
 import 'package:phone_finder/data/settings/locale_storage.dart';
+import 'package:phone_finder/data/settings/theme_storage.dart';
 import 'package:phone_finder/domain/router/router_usecase.dart';
 import 'package:phone_finder/domain/login/login_usecase.dart';
 import 'package:phone_finder/domain/login/logout_usecase.dart';
@@ -15,6 +16,8 @@ import 'package:phone_finder/state/login/login_cubit.dart';
 import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:phone_finder/state/settings/locale_cubit.dart';
 import 'package:phone_finder/state/settings/locale_state.dart';
+import 'package:phone_finder/state/settings/theme_cubit.dart';
+import 'package:phone_finder/state/settings/theme_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -31,6 +34,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final storage = LoginStorage(prefs);
   final localeStorage = LocaleStorage(prefs);
+  final themeStorage = ThemeStorage(prefs);
   final api = AuthApi();
   final repo = LoginRepositoryImpl(api, storage);
   final loginUseCase = LoginUseCase(repo);
@@ -39,12 +43,18 @@ void main() async {
 
   final routerCubit = RouterCubit(routerUseCase);
   final localeCubit = LocaleCubit(localeStorage);
+  final themeCubit = ThemeCubit(themeStorage);
+  
+  // Load saved locale and theme
+  await localeCubit.loadLocale();
+  await themeCubit.loadThemeMode();
 
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider.value(value: routerCubit),
         BlocProvider.value(value: localeCubit),
+        BlocProvider.value(value: themeCubit),
         BlocProvider(create: (_) => LoginCubit(loginUseCase)),
         BlocProvider(create: (_) => LogoutCubit(logoutUseCase)),
       ],
@@ -79,19 +89,28 @@ class _MyAppState extends State<MyApp> {
         // Get the current locale from cubit
         final locale = context.read<LocaleCubit>().currentLocale;
 
-        return MaterialApp.router(
-          routerConfig: _router, // Use the same router instance
-          locale: locale,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-          theme: ThemeData.light(useMaterial3: true),
-          darkTheme: ThemeData.dark(useMaterial3: true),
+        return BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, themeState) {
+            // Get the current theme mode from cubit
+            final themeMode = context.read<ThemeCubit>().currentThemeMode;
+
+            return MaterialApp.router(
+              routerConfig: _router, // Use the same router instance
+              locale: locale,
+              themeMode: themeMode,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              onGenerateTitle: (context) =>
+                  AppLocalizations.of(context)!.appTitle,
+              theme: ThemeData.light(useMaterial3: true),
+              darkTheme: ThemeData.dark(useMaterial3: true),
+            );
+          },
         );
       },
     );
