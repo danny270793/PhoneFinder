@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phone_finder/domain/settings/locale_repository.dart';
+import 'package:phone_finder/domain/settings/locale_usecase.dart';
 import 'package:phone_finder/state/settings/locale_state.dart';
 
 class LocaleCubit extends Cubit<LocaleState> {
-  final LocaleRepository _repository;
+  final LocaleUseCase _useCase;
 
-  LocaleCubit(this._repository) : super(const LocaleInitial()) {}
+  LocaleCubit(this._useCase) : super(const LocaleInitial()) {}
 
   Future<void> loadLocale() async {
-    final savedLocale = _repository.getLocale();
-    if (savedLocale != null) {
-      emit(LocaleLoaded(Locale(savedLocale)));
-    } else {
-      emit(const LocaleLoaded(Locale('en')));
-    }
+    final locale = _useCase.getLocaleOrDefault();
+    emit(LocaleLoaded(locale));
   }
 
   Future<void> changeLocale(String languageCode) async {
-    await _repository.saveLocale(languageCode);
+    await _useCase.saveLocale(languageCode);
     emit(LocaleChanged(Locale(languageCode)));
   }
 
