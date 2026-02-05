@@ -7,6 +7,8 @@ import 'package:phone_finder/data/login/login_repository_impl.dart';
 import 'package:phone_finder/data/login/login_storage.dart';
 import 'package:phone_finder/data/settings/locale_storage.dart';
 import 'package:phone_finder/data/settings/theme_storage.dart';
+import 'package:phone_finder/domain/settings/locale_repository.dart';
+import 'package:phone_finder/domain/settings/theme_repository.dart';
 import 'package:phone_finder/domain/router/router_usecase.dart';
 import 'package:phone_finder/domain/login/login_usecase.dart';
 import 'package:phone_finder/domain/login/logout_usecase.dart';
@@ -32,18 +34,25 @@ void main() async {
   usePathUrlStrategy();
 
   final prefs = await SharedPreferences.getInstance();
+  
+  // Data layer - Concrete implementations
   final storage = LoginStorage(prefs);
-  final localeStorage = LocaleStorage(prefs);
-  final themeStorage = ThemeStorage(prefs);
   final api = AuthApi();
+  
+  // Domain layer - Repositories (interfaces with implementations)
+  final LocaleRepository localeRepository = LocaleStorageImpl(prefs);
+  final ThemeRepository themeRepository = ThemeStorageImpl(prefs);
   final repo = LoginRepositoryImpl(api, storage);
+  
+  // Domain layer - Use cases
   final loginUseCase = LoginUseCase(repo);
   final logoutUseCase = LogoutUseCase(repo);
   final routerUseCase = RouterUseCase(repo);
 
+  // State management - Cubits depend on interfaces
   final routerCubit = RouterCubit(routerUseCase);
-  final localeCubit = LocaleCubit(localeStorage);
-  final themeCubit = ThemeCubit(themeStorage);
+  final localeCubit = LocaleCubit(localeRepository);
+  final themeCubit = ThemeCubit(themeRepository);
   
   routerCubit.init();
   await localeCubit.loadLocale();
