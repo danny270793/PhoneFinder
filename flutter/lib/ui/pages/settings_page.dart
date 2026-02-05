@@ -11,17 +11,6 @@ class SettingsPage extends StatelessWidget {
 
   const SettingsPage({super.key});
 
-  String _getLanguageName(String languageCode, AppLocalizations l10n) {
-    switch (languageCode) {
-      case 'en':
-        return l10n.languageEnglish;
-      case 'es':
-        return l10n.languageSpanish;
-      default:
-        return languageCode;
-    }
-  }
-
   String _getLanguageNativeName(String languageCode) {
     switch (languageCode) {
       case 'en':
@@ -161,7 +150,6 @@ class SettingsPage extends StatelessWidget {
         builder: (context, localeState) {
           final currentLanguageCode =
               context.read<LocaleCubit>().currentLocale.languageCode;
-          final currentLanguageName = _getLanguageName(currentLanguageCode, l10n);
           final currentLanguageNative = _getLanguageNativeName(currentLanguageCode);
 
           return BlocBuilder<ThemeCubit, ThemeState>(
@@ -176,19 +164,7 @@ class SettingsPage extends StatelessWidget {
                     leading: const Icon(Icons.language),
                     title: Text(l10n.language),
                     subtitle: Text(currentLanguageNative),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          currentLanguageName,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Icon(Icons.arrow_forward_ios, size: 16),
-                      ],
-                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () => _showLanguageDialog(context),
                   ),
                   const Divider(),
