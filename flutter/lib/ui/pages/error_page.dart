@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phone_finder/l10n/app_localizations.dart';
 
 class ErrorPage extends StatelessWidget {
   static const routeName = '/error';
@@ -7,6 +8,12 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Error')));
+    final l10n = AppLocalizations.of(context)!;
+    
+    return Scaffold(
+      body: Center(
+        child: Text(l10n.error),
+      ),
+    );
   }
 }
