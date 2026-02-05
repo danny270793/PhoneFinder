@@ -28,26 +28,26 @@ import 'config/url_strategy_web.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   usePathUrlStrategy();
 
   final prefs = await SharedPreferences.getInstance();
-  
+
   final storage = LoginStorage(prefs);
   final api = AuthApi();
-  
+
   final LocaleRepository localeRepository = LocaleStorageImpl(prefs);
   final ThemeRepository themeRepository = ThemeStorageImpl(prefs);
   final repo = LoginRepositoryImpl(api, storage);
-  
+
   final loginUseCase = LoginUseCase(repo);
   final logoutUseCase = LogoutUseCase(repo);
   final routerUseCase = RouterUseCase(repo);
-  
+
   final routerCubit = RouterCubit(routerUseCase);
   final localeCubit = LocaleCubit(localeRepository);
   final themeCubit = ThemeCubit(themeRepository);
-  
+
   await routerCubit.init();
   await localeCubit.loadLocale();
   await themeCubit.loadThemeMode();
