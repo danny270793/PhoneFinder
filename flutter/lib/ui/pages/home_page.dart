@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.settings),
             tooltip: l10n.settings,
             onPressed: () {
-              context.go(SettingsPage.routeName);
+              context.push(SettingsPage.routeName);
             },
           ),
         ],
