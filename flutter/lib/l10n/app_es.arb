@@ -55,5 +55,21 @@
   "languageSpanish": "Español",
   "@languageSpanish": {
     "description": "Opción de idioma español"
+  },
+  "theme": "Tema",
+  "@theme": {
+    "description": "Etiqueta de selección de tema"
+  },
+  "themeLight": "Claro",
+  "@themeLight": {
+    "description": "Opción de tema claro"
+  },
+  "themeDark": "Oscuro",
+  "@themeDark": {
+    "description": "Opción de tema oscuro"
+  },
+  "themeSystem": "Sistema",
+  "@themeSystem": {
+    "description": "Opción de tema del sistema (sigue la configuración del dispositivo)"
   }
 }
