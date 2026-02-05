@@ -6,6 +6,7 @@ class RouterUseCase {
   RouterUseCase(this.repository);
 
   Future<bool> execute() async {
-    return await repository.getCurrentUser()!= null;
+    final user = await repository.getCurrentUser();
+    return user != null;
   }
 }
