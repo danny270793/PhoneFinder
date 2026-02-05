@@ -9,6 +9,8 @@ import 'package:phone_finder/data/settings/locale_storage.dart';
 import 'package:phone_finder/data/settings/theme_storage.dart';
 import 'package:phone_finder/domain/settings/locale_repository.dart';
 import 'package:phone_finder/domain/settings/theme_repository.dart';
+import 'package:phone_finder/domain/settings/locale_usecase.dart';
+import 'package:phone_finder/domain/settings/theme_usecase.dart';
 import 'package:phone_finder/domain/router/router_usecase.dart';
 import 'package:phone_finder/domain/login/login_usecase.dart';
 import 'package:phone_finder/domain/login/logout_usecase.dart';
@@ -32,21 +34,23 @@ void main() async {
   usePathUrlStrategy();
 
   final prefs = await SharedPreferences.getInstance();
-
+  
   final storage = LoginStorage(prefs);
   final api = AuthApi();
-
+  
   final LocaleRepository localeRepository = LocaleStorageImpl(prefs);
   final ThemeRepository themeRepository = ThemeStorageImpl(prefs);
   final repo = LoginRepositoryImpl(api, storage);
-
+  
   final loginUseCase = LoginUseCase(repo);
   final logoutUseCase = LogoutUseCase(repo);
   final routerUseCase = RouterUseCase(repo);
-
+  final localeUseCase = LocaleUseCase(localeRepository);
+  final themeUseCase = ThemeUseCase(themeRepository);
+  
   final routerCubit = RouterCubit(routerUseCase);
-  final localeCubit = LocaleCubit(localeRepository);
-  final themeCubit = ThemeCubit(themeRepository);
+  final localeCubit = LocaleCubit(localeUseCase);
+  final themeCubit = ThemeCubit(themeUseCase);
 
   await routerCubit.init();
   await localeCubit.loadLocale();
