@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:phone_finder/config/app_routes.dart';
 import 'package:phone_finder/data/login/login_api.dart';
 import 'package:phone_finder/data/login/login_repository_impl.dart';
@@ -55,10 +56,24 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final RouterCubit routerCubit;
 
   const MyApp({super.key, required this.routerCubit});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late final GoRouter _router;
+
+  @override
+  void initState() {
+    super.initState();
+    // Create router once and reuse it
+    _router = AppRoutes.getRouter(widget.routerCubit);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +83,7 @@ class MyApp extends StatelessWidget {
         final locale = context.read<LocaleCubit>().currentLocale;
 
         return MaterialApp.router(
-          routerConfig: AppRoutes.getRouter(routerCubit),
+          routerConfig: _router, // Use the same router instance
           locale: locale,
           localizationsDelegates: const [
             AppLocalizations.delegate,
