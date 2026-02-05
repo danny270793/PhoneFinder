@@ -1,51 +1,55 @@
 import 'package:phone_finder/data/login/login_api.dart' as auth_api;
-import 'package:phone_finder/data/login/login_storage.dart';
 import 'package:phone_finder/data/login/login_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
-  final auth_api.AuthApi api;
-  final LoginStorage storage;
+  static const String _accessTokenKey = 'access_token';
+  static const String _refreshTokenKey = 'refresh_token';
 
-  LoginRepositoryImpl(this.api, this.storage);
+  final auth_api.AuthApi api;
+  final SharedPreferences prefs;
+
+  LoginRepositoryImpl(this.api, this.prefs);
 
   @override
   Future<User> login({required String email, required String password}) async {
     final auth_api.User user = await api.login(email, password);
 
-    await storage.saveUser(
-      accessToken: user.accessToken,
-      refreshToken: user.refreshToken,
-    );
+    await prefs.setString(_accessTokenKey, user.accessToken);
+    await prefs.setString(_refreshTokenKey, user.refreshToken);
 
     return User(accessToken: user.accessToken, refreshToken: user.refreshToken);
   }
 
   @override
   Future<void> logout() async {
-    final userData = await storage.getUser();
+    final accessToken = prefs.getString(_accessTokenKey);
+    final refreshToken = prefs.getString(_refreshTokenKey);
 
-    if (userData != null) {
+    if (accessToken != null && refreshToken != null) {
       final auth_api.User apiUser = auth_api.User(
-        accessToken: userData['accessToken']!,
-        refreshToken: userData['refreshToken']!,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
       );
       await api.logout(apiUser);
     }
 
-    await storage.clearUser();
+    await prefs.remove(_accessTokenKey);
+    await prefs.remove(_refreshTokenKey);
   }
 
   @override
   Future<User?> getCurrentUser() async {
-    final userData = await storage.getUser();
+    final accessToken = prefs.getString(_accessTokenKey);
+    final refreshToken = prefs.getString(_refreshTokenKey);
 
-    if (userData == null) {
+    if (accessToken == null || refreshToken == null) {
       return null;
     }
 
     return User(
-      accessToken: userData['accessToken']!,
-      refreshToken: userData['refreshToken']!,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     );
   }
 }
