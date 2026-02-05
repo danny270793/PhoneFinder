@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:phone_finder/state/login/logout_state.dart';
-import 'package:phone_finder/ui/pages/login_page.dart';
+import 'package:phone_finder/state/router/router_cubit.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home';
@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is LogoutSuccess) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
+            context.read<RouterCubit>().onLogoutSuccess();
           }
         },
         builder: (context, state) {
