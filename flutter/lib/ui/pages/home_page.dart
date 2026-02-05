@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_finder/l10n/app_localizations.dart';
 import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:phone_finder/state/login/logout_state.dart';
 import 'package:phone_finder/state/router/router_cubit.dart';
@@ -11,8 +12,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(title: Text(l10n.home)),
       body: BlocConsumer<LogoutCubit, LogoutState>(
         listener: (context, state) {
           if (state is LogoutError) {
@@ -36,7 +39,7 @@ class HomePage extends StatelessWidget {
                         },
                   child: state is LogoutRequested
                       ? const CircularProgressIndicator()
-                      : const Text('Logout'),
+                      : Text(l10n.logout),
                 ),
               ],
             ),
