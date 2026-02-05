@@ -56,6 +56,14 @@
   "@languageSpanish": {
     "description": "Spanish language option"
   },
+  "languageEnglishNative": "English",
+  "@languageEnglishNative": {
+    "description": "English language name in its native form"
+  },
+  "languageSpanishNative": "Español",
+  "@languageSpanishNative": {
+    "description": "Spanish language name in its native form"
+  },
   "theme": "Theme",
   "@theme": {
     "description": "Theme selection label"
