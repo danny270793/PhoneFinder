@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:phone_finder/domain/settings/theme_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:phone_finder/domain/storage/preferences_repository.dart';
 
 class ThemeStorageImpl implements ThemeRepository {
   static const _themeModeKey = 'theme_mode';
-  final SharedPreferences _prefs;
+  final PreferencesRepository _prefs;
 
   ThemeStorageImpl(this._prefs);
 
