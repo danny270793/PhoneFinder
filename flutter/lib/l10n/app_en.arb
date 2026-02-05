@@ -39,5 +39,9 @@
   "loading": "Loading...",
   "@loading": {
     "description": "Loading indicator text"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings page title and button text"
   }
 }
