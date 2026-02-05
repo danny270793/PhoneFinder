@@ -11,19 +11,17 @@ import 'package:phone_finder/ui/pages/login_page.dart';
 import 'package:phone_finder/ui/pages/splash_page.dart';
 
 class AppRoutes {
-  static const List<String> protectedRoutes = [
-    HomePage.routeName,
-  ];
+  static const List<String> protectedRoutes = [HomePage.routeName];
 
-  static const List<String> publicRoutes = [
-    LoginPage.routeName,
-  ];
+  static const List<String> publicRoutes = [LoginPage.routeName];
 
   static bool isProtected(String route) => protectedRoutes.contains(route);
 
   static bool isPublic(String route) => publicRoutes.contains(route);
 
-  static GoRouterRefreshStream createRefreshStream(Stream<RouterState> stream) => GoRouterRefreshStream(stream);
+  static GoRouterRefreshStream createRefreshStream(
+    Stream<RouterState> stream,
+  ) => GoRouterRefreshStream(stream);
 
   static String? onRedirect(RouterState routerState, String location) {
     if (routerState is RouterCheckAuthError) {
@@ -71,15 +69,15 @@ class AppRoutes {
   ];
 
   static GoRouter getRouter(RouterCubit routerCubit) => GoRouter(
-        initialLocation: SplashPage.routeName,
-        refreshListenable: AppRoutes.createRefreshStream(routerCubit.stream),
-        redirect: (BuildContext context, GoRouterState state) =>
-          AppRoutes.onRedirect(
-            context.read<RouterCubit>().state,
-            state.matchedLocation,
-          ),
-        routes: AppRoutes.getRoutes(),
-      );
+    initialLocation: SplashPage.routeName,
+    refreshListenable: AppRoutes.createRefreshStream(routerCubit.stream),
+    redirect: (BuildContext context, GoRouterState state) =>
+        AppRoutes.onRedirect(
+          context.read<RouterCubit>().state,
+          state.matchedLocation,
+        ),
+    routes: AppRoutes.getRoutes(),
+  );
 }
 
 class GoRouterRefreshStream extends ChangeNotifier {
