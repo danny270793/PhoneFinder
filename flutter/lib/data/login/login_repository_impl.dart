@@ -1,13 +1,13 @@
 import 'package:phone_finder/data/login/login_api.dart' as auth_api;
 import 'package:phone_finder/data/login/login_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:phone_finder/domain/storage/preferences_repository.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
   static const String _accessTokenKey = 'access_token';
   static const String _refreshTokenKey = 'refresh_token';
 
   final auth_api.AuthApi api;
-  final SharedPreferences prefs;
+  final PreferencesRepository prefs;
 
   LoginRepositoryImpl(this.api, this.prefs);
 
