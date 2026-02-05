@@ -12,7 +12,6 @@ class LoginRepositoryImpl implements LoginRepository {
   Future<User> login({required String email, required String password}) async {
     final auth_api.User user = await api.login(email, password);
 
-    // Store user data locally
     await storage.saveUser(
       accessToken: user.accessToken,
       refreshToken: user.refreshToken,
@@ -23,7 +22,6 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<void> logout() async {
-    // Get the stored user
     final userData = await storage.getUser();
 
     if (userData != null) {
@@ -34,7 +32,6 @@ class LoginRepositoryImpl implements LoginRepository {
       await api.logout(apiUser);
     }
 
-    // Clear stored user data
     await storage.clearUser();
   }
 
