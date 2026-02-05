@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phone_finder/config/app_routes.dart';
 import 'package:phone_finder/data/login/login_api.dart';
+import 'package:phone_finder/data/login/login_repository.dart';
 import 'package:phone_finder/data/login/login_repository_impl.dart';
-import 'package:phone_finder/data/login/login_storage.dart';
 import 'package:phone_finder/data/settings/locale_storage.dart';
 import 'package:phone_finder/data/settings/theme_storage.dart';
 import 'package:phone_finder/domain/settings/locale_repository.dart';
@@ -35,19 +35,20 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
   
-  final storage = LoginStorage(prefs);
   final api = AuthApi();
   
   final LocaleRepository localeRepository = LocaleStorageImpl(prefs);
   final ThemeRepository themeRepository = ThemeStorageImpl(prefs);
-  final repo = LoginRepositoryImpl(api, storage);
+  final LoginRepository loginRepository = LoginRepositoryImpl(api, prefs);
   
-  final loginUseCase = LoginUseCase(repo);
-  final logoutUseCase = LogoutUseCase(repo);
-  final routerUseCase = RouterUseCase(repo);
+  final loginUseCase = LoginUseCase(loginRepository);
+  final logoutUseCase = LogoutUseCase(loginRepository);
+  final routerUseCase = RouterUseCase(loginRepository);
   final localeUseCase = LocaleUseCase(localeRepository);
   final themeUseCase = ThemeUseCase(themeRepository);
   
+  final loginCubit = LoginCubit(loginUseCase);
+  final logoutCubit = LogoutCubit(logoutUseCase);
   final routerCubit = RouterCubit(routerUseCase);
   final localeCubit = LocaleCubit(localeUseCase);
   final themeCubit = ThemeCubit(themeUseCase);
@@ -59,11 +60,11 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider.value(value: loginCubit),
+        BlocProvider.value(value: logoutCubit),
         BlocProvider.value(value: routerCubit),
         BlocProvider.value(value: localeCubit),
         BlocProvider.value(value: themeCubit),
-        BlocProvider(create: (_) => LoginCubit(loginUseCase)),
-        BlocProvider(create: (_) => LogoutCubit(logoutUseCase)),
       ],
       child: MyApp(routerCubit: routerCubit),
     ),
