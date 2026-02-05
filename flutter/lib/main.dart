@@ -39,9 +39,6 @@ void main() async {
 
   final routerCubit = RouterCubit(routerUseCase);
   final localeCubit = LocaleCubit(localeStorage);
-  
-  // Load saved locale
-  await localeCubit.loadLocale();
 
   runApp(
     MultiBlocProvider(
