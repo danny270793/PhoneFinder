@@ -18,4 +18,13 @@ class AuthRepositoryImpl implements AuthRepository {
       refreshToken: user.refreshToken,
     );
   }
+
+  @override
+  Future<void> logout(User user) async {
+    final auth_api.User apiUser = auth_api.User(
+      accessToken: user.accessToken,
+      refreshToken: user.refreshToken,
+    );
+    await api.logout(apiUser);
+  }
 }
