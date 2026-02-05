@@ -11,12 +11,12 @@ class SettingsPage extends StatelessWidget {
 
   const SettingsPage({super.key});
 
-  String _getLanguageNativeName(String languageCode) {
+  String _getLanguageNativeName(String languageCode, AppLocalizations l10n) {
     switch (languageCode) {
       case 'en':
-        return 'English';
+        return l10n.languageEnglishNative;
       case 'es':
-        return 'Español';
+        return l10n.languageSpanishNative;
       default:
         return languageCode;
     }
@@ -58,7 +58,7 @@ class SettingsPage extends StatelessWidget {
           children: [
             RadioListTile<String>(
               title: Text(l10n.languageEnglish),
-              subtitle: const Text('English'),
+              subtitle: Text(l10n.languageEnglishNative),
               value: 'en',
               groupValue: currentLanguage,
               onChanged: (value) {
@@ -70,7 +70,7 @@ class SettingsPage extends StatelessWidget {
             ),
             RadioListTile<String>(
               title: Text(l10n.languageSpanish),
-              subtitle: const Text('Español'),
+              subtitle: Text(l10n.languageSpanishNative),
               value: 'es',
               groupValue: currentLanguage,
               onChanged: (value) {
@@ -154,6 +154,7 @@ class SettingsPage extends StatelessWidget {
               .languageCode;
           final currentLanguageNative = _getLanguageNativeName(
             currentLanguageCode,
+            l10n,
           );
 
           return BlocBuilder<ThemeCubit, ThemeState>(
