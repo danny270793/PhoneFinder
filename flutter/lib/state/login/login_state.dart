@@ -1,8 +1,8 @@
 sealed class LoginState {}
 
-class LoginInitial extends LoginState {}
+class LoginIdle extends LoginState {}
 
-class LoginLoading extends LoginState {}
+class LoginRequested extends LoginState {}
 
 class LoginSuccess extends LoginState {}
 
