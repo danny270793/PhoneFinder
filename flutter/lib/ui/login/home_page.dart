@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:phone_finder/state/login/logout_state.dart';
+import 'package:phone_finder/ui/login/login_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -15,6 +16,8 @@ class HomePage extends StatelessWidget {
           if (state is LogoutError) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));
+          } else if (state is LogoutSuccess) {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
           }
         },
         builder: (context, state) {
