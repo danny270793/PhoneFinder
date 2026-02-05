@@ -51,6 +51,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get languageSpanish => 'Español';
 
   @override
+  String get languageEnglishNative => 'English';
+
+  @override
+  String get languageSpanishNative => 'Español';
+
+  @override
   String get theme => 'Tema';
 
   @override
