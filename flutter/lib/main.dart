@@ -45,7 +45,7 @@ void main() async {
   final localeCubit = LocaleCubit(localeStorage);
   final themeCubit = ThemeCubit(themeStorage);
   
-  // Load saved locale and theme
+  routerCubit.init();
   await localeCubit.loadLocale();
   await themeCubit.loadThemeMode();
 
