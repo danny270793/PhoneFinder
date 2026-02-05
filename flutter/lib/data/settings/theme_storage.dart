@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:phone_finder/domain/settings/theme_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeStorage {
+class ThemeStorageImpl implements ThemeRepository {
   static const _themeModeKey = 'theme_mode';
   final SharedPreferences _prefs;
 
-  ThemeStorage(this._prefs);
+  ThemeStorageImpl(this._prefs);
 
-  /// Save the selected theme mode
+  @override
   Future<void> saveThemeMode(ThemeMode mode) async {
     await _prefs.setString(_themeModeKey, mode.name);
   }
 
-  /// Get the saved theme mode, returns null if not set
+  @override
   ThemeMode? getThemeMode() {
     final savedMode = _prefs.getString(_themeModeKey);
     if (savedMode == null) return null;
@@ -29,7 +30,7 @@ class ThemeStorage {
     }
   }
 
-  /// Clear the saved theme mode
+  @override
   Future<void> clearThemeMode() async {
     await _prefs.remove(_themeModeKey);
   }
