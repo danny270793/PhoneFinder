@@ -37,4 +37,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get loading => 'Cargando...';
+
+  @override
+  String get settings => 'Configuración';
 }
