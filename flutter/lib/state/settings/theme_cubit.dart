@@ -8,24 +8,20 @@ class ThemeCubit extends Cubit<ThemeState> {
 
   ThemeCubit(this._repository) : super(const ThemeInitial());
 
-  /// Load the saved theme mode from storage
   Future<void> loadThemeMode() async {
     final savedThemeMode = _repository.getThemeMode();
     if (savedThemeMode != null) {
       emit(ThemeLoaded(savedThemeMode));
     } else {
-      // Default to system theme if no theme is saved
       emit(const ThemeLoaded(ThemeMode.system));
     }
   }
 
-  /// Change the theme mode and save it
   Future<void> changeThemeMode(ThemeMode mode) async {
     await _repository.saveThemeMode(mode);
     emit(ThemeChanged(mode));
   }
 
-  /// Get the current theme mode
   ThemeMode get currentThemeMode {
     final currentState = state;
     if (currentState is ThemeLoaded) {
@@ -33,6 +29,6 @@ class ThemeCubit extends Cubit<ThemeState> {
     } else if (currentState is ThemeChanged) {
       return currentState.themeMode;
     }
-    return ThemeMode.system; // Default fallback
+    return ThemeMode.system;
   }
 }
