@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phone_finder/data/settings/theme_storage.dart';
+import 'package:phone_finder/domain/settings/theme_repository.dart';
 import 'package:phone_finder/state/settings/theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  final ThemeStorage _storage;
+  final ThemeRepository _repository;
 
-  ThemeCubit(this._storage) : super(const ThemeInitial());
+  ThemeCubit(this._repository) : super(const ThemeInitial());
 
   /// Load the saved theme mode from storage
   Future<void> loadThemeMode() async {
-    final savedThemeMode = _storage.getThemeMode();
+    final savedThemeMode = _repository.getThemeMode();
     if (savedThemeMode != null) {
       emit(ThemeLoaded(savedThemeMode));
     } else {
@@ -21,7 +21,7 @@ class ThemeCubit extends Cubit<ThemeState> {
 
   /// Change the theme mode and save it
   Future<void> changeThemeMode(ThemeMode mode) async {
-    await _storage.saveThemeMode(mode);
+    await _repository.saveThemeMode(mode);
     emit(ThemeChanged(mode));
   }
 
