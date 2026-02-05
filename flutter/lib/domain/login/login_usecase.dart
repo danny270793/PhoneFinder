@@ -9,9 +9,6 @@ class LoginUseCase {
     if (email.isEmpty || password.isEmpty) {
       throw Exception('Invalid credentials');
     }
-    return repository.login(
-      email: email,
-      password: password,
-    );
+    return repository.login(email: email, password: password);
   }
 }
