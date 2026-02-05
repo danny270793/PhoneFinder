@@ -16,8 +16,9 @@ class HomePage extends StatelessWidget {
       body: BlocConsumer<LogoutCubit, LogoutState>(
         listener: (context, state) {
           if (state is LogoutError) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is LogoutSuccess) {
             context.read<RouterCubit>().onLogoutSuccess();
           }
@@ -26,8 +27,8 @@ class HomePage extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
-                children: [
-                  ElevatedButton(
+              children: [
+                ElevatedButton(
                   onPressed: state is LogoutRequested
                       ? null
                       : () {
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
                   child: state is LogoutRequested
                       ? const CircularProgressIndicator()
                       : const Text('Logout'),
-                )
+                ),
               ],
             ),
           );
