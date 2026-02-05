@@ -24,10 +24,7 @@ class LoginStorage {
       return null;
     }
 
-    return {
-      'accessToken': accessToken,
-      'refreshToken': refreshToken,
-    };
+    return {'accessToken': accessToken, 'refreshToken': refreshToken};
   }
 
   Future<void> clearUser() async {
