@@ -23,38 +23,32 @@ import 'package:phone_finder/state/settings/theme_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-// Conditional import: uses web implementation on web, stub on other platforms
 import 'config/url_strategy_web.dart'
     if (dart.library.io) 'config/url_strategy_stub.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Enable clean URLs on web (removes the # from URLs)
   usePathUrlStrategy();
 
   final prefs = await SharedPreferences.getInstance();
   
-  // Data layer - Concrete implementations
   final storage = LoginStorage(prefs);
   final api = AuthApi();
   
-  // Domain layer - Repositories (interfaces with implementations)
   final LocaleRepository localeRepository = LocaleStorageImpl(prefs);
   final ThemeRepository themeRepository = ThemeStorageImpl(prefs);
   final repo = LoginRepositoryImpl(api, storage);
   
-  // Domain layer - Use cases
   final loginUseCase = LoginUseCase(repo);
   final logoutUseCase = LogoutUseCase(repo);
   final routerUseCase = RouterUseCase(repo);
-
-  // State management - Cubits depend on interfaces
+  
   final routerCubit = RouterCubit(routerUseCase);
   final localeCubit = LocaleCubit(localeRepository);
   final themeCubit = ThemeCubit(themeRepository);
   
-  routerCubit.init();
+  await routerCubit.init();
   await localeCubit.loadLocale();
   await themeCubit.loadThemeMode();
 
@@ -87,7 +81,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    // Create router once and reuse it
     _router = AppRoutes.getRouter(widget.routerCubit);
   }
 
@@ -95,16 +88,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocBuilder<LocaleCubit, LocaleState>(
       builder: (context, localeState) {
-        // Get the current locale from cubit
         final locale = context.read<LocaleCubit>().currentLocale;
 
         return BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, themeState) {
-            // Get the current theme mode from cubit
             final themeMode = context.read<ThemeCubit>().currentThemeMode;
 
             return MaterialApp.router(
-              routerConfig: _router, // Use the same router instance
+              routerConfig: _router,
               locale: locale,
               themeMode: themeMode,
               localizationsDelegates: const [
