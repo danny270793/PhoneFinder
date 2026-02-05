@@ -2,14 +2,14 @@ sealed class RouterState {}
 
 class RouterIdle extends RouterState {}
 
-class RouterInitRequested extends RouterState {}
+class RouterCheckAuthRequested extends RouterState {}
 
-class RouterInitSuccess extends RouterState {
+class RouterCheckAuthSuccess extends RouterState {
   final bool isLogged;
-  RouterInitSuccess(this.isLogged);
+  RouterCheckAuthSuccess(this.isLogged);
 }
 
-class RouterInitError extends RouterState {
+class RouterCheckAuthError extends RouterState {
   final String message;
-  RouterInitError(this.message);
+  RouterCheckAuthError(this.message);
 }
