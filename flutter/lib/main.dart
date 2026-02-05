@@ -14,8 +14,15 @@ import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+// Conditional import: uses web implementation on web, stub on other platforms
+import 'config/url_strategy_web.dart'
+    if (dart.library.io) 'config/url_strategy_stub.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Enable clean URLs on web (removes the # from URLs)
+  usePathUrlStrategy();
 
   final prefs = await SharedPreferences.getInstance();
   final storage = LoginStorage(prefs);
