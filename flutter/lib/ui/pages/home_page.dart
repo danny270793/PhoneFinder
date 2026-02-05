@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:phone_finder/l10n/app_localizations.dart';
 import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:phone_finder/state/login/logout_state.dart';
 import 'package:phone_finder/state/router/router_cubit.dart';
+import 'package:phone_finder/ui/pages/settings_page.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home';
@@ -15,7 +17,18 @@ class HomePage extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.home)),
+      appBar: AppBar(
+        title: Text(l10n.home),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: l10n.settings,
+            onPressed: () {
+              context.push(SettingsPage.routeName);
+            },
+          ),
+        ],
+      ),
       body: BlocConsumer<LogoutCubit, LogoutState>(
         listener: (context, state) {
           if (state is LogoutError) {
