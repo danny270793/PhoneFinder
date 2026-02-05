@@ -1,9 +1,9 @@
 import 'package:phone_finder/domain/settings/locale_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:phone_finder/domain/storage/preferences_repository.dart';
 
 class LocaleStorageImpl implements LocaleRepository {
   static const _localeKey = 'selected_locale';
-  final SharedPreferences _prefs;
+  final PreferencesRepository _prefs;
 
   LocaleStorageImpl(this._prefs);
 
