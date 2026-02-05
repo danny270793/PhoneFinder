@@ -5,16 +5,27 @@ import 'package:phone_finder/state/router/router_state.dart';
 class RouterCubit extends Cubit<RouterState> {
   final RouterUseCase routerUseCase;
 
-  RouterCubit(this.routerUseCase) : super(RouterIdle());
+  RouterCubit(this.routerUseCase) : super(RouterIdle()) {
+    init();
+  }
 
   Future<void> init() async {
-    emit(RouterInitRequested());
+    emit(RouterCheckAuthRequested());
 
     try {
+      await Future.delayed(const Duration(seconds: 1));
       final isLogged = await routerUseCase.execute();
-      emit(RouterInitSuccess(isLogged));
+      emit(RouterCheckAuthSuccess(isLogged));
     } catch (e) {
-      emit(RouterInitError(e.toString()));
+      emit(RouterCheckAuthError(e.toString()));
     }
+  }
+
+  void onLoginSuccess() {
+    emit(RouterCheckAuthSuccess(true));
+  }
+
+  void onLogoutSuccess() {
+    emit(RouterCheckAuthSuccess(false));
   }
 }
