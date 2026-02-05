@@ -8,24 +8,20 @@ class LocaleCubit extends Cubit<LocaleState> {
 
   LocaleCubit(this._repository) : super(const LocaleInitial()) {}
 
-  /// Load the saved locale from storage
   Future<void> loadLocale() async {
     final savedLocale = _repository.getLocale();
     if (savedLocale != null) {
       emit(LocaleLoaded(Locale(savedLocale)));
     } else {
-      // Default to English if no locale is saved
       emit(const LocaleLoaded(Locale('en')));
     }
   }
 
-  /// Change the locale and save it
   Future<void> changeLocale(String languageCode) async {
     await _repository.saveLocale(languageCode);
     emit(LocaleChanged(Locale(languageCode)));
   }
 
-  /// Get the current locale
   Locale get currentLocale {
     final currentState = state;
     if (currentState is LocaleLoaded) {
@@ -33,6 +29,6 @@ class LocaleCubit extends Cubit<LocaleState> {
     } else if (currentState is LocaleChanged) {
       return currentState.locale;
     }
-    return const Locale('en'); // Default fallback
+    return const Locale('en');
   }
 }
