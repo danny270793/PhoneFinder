@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phone_finder/domain/auth/auth_repository.dart';
 import 'package:phone_finder/domain/auth/login_usecase.dart';
 import 'package:phone_finder/state/login/login_state.dart';
 
@@ -12,7 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginRequested());
 
     try {
-      final User user = await loginUseCase.execute(email, password);
+      await loginUseCase.execute(email, password);
       emit(LoginSuccess());
     } catch (e) {
       emit(LoginError(e.toString()));
