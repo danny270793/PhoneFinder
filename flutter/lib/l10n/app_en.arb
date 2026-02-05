@@ -1,0 +1,43 @@
+{
+  "@@locale": "en",
+  "appTitle": "Phone Finder",
+  "@appTitle": {
+    "description": "The application title"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button and page title"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home page title"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error page title"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email input label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password input label"
+  },
+  "emailHint": "Enter your email",
+  "@emailHint": {
+    "description": "Email input hint text"
+  },
+  "passwordHint": "Enter your password",
+  "@passwordHint": {
+    "description": "Password input hint text"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  }
+}
