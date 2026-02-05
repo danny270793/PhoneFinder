@@ -9,29 +9,23 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(this.api, this.storage);
 
   @override
-  Future<User> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<User> login({required String email, required String password}) async {
     final auth_api.User user = await api.login(email, password);
-    
+
     // Store user data locally
     await storage.saveUser(
       accessToken: user.accessToken,
       refreshToken: user.refreshToken,
     );
-    
-    return User(
-      accessToken: user.accessToken,
-      refreshToken: user.refreshToken,
-    );
+
+    return User(accessToken: user.accessToken, refreshToken: user.refreshToken);
   }
 
   @override
   Future<void> logout() async {
     // Get the stored user
     final userData = await storage.getUser();
-    
+
     if (userData != null) {
       final auth_api.User apiUser = auth_api.User(
         accessToken: userData['accessToken']!,
@@ -39,7 +33,7 @@ class LoginRepositoryImpl implements LoginRepository {
       );
       await api.logout(apiUser);
     }
-    
+
     // Clear stored user data
     await storage.clearUser();
   }
@@ -47,11 +41,11 @@ class LoginRepositoryImpl implements LoginRepository {
   @override
   Future<User?> getCurrentUser() async {
     final userData = await storage.getUser();
-    
+
     if (userData == null) {
       return null;
     }
-    
+
     return User(
       accessToken: userData['accessToken']!,
       refreshToken: userData['refreshToken']!,
