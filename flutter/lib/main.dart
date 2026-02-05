@@ -7,10 +7,12 @@ import 'package:phone_finder/data/login/login_storage.dart';
 import 'package:phone_finder/domain/router/router_usecase.dart';
 import 'package:phone_finder/domain/login/login_usecase.dart';
 import 'package:phone_finder/domain/login/logout_usecase.dart';
+import 'package:phone_finder/l10n/app_localizations.dart';
 import 'package:phone_finder/state/router/router_cubit.dart';
 import 'package:phone_finder/state/login/login_cubit.dart';
 import 'package:phone_finder/state/login/logout_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +48,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter(routerCubit),
-      title: 'Phone Finder',
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       theme: ThemeData.light(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
     );
