@@ -6,7 +6,7 @@ import 'package:phone_finder/state/router/router_cubit.dart';
 
 class LoginPage extends StatelessWidget {
   static const routeName = '/login';
-  
+
   LoginPage({super.key});
 
   final TextEditingController emailController = TextEditingController();
@@ -19,8 +19,9 @@ class LoginPage extends StatelessWidget {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginError) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is LoginSuccess) {
             context.read<RouterCubit>().onLoginSuccess();
           }
@@ -31,19 +32,16 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 TextField(controller: emailController),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                ),
+                TextField(controller: passwordController, obscureText: true),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: state is LoginRequested
                       ? null
                       : () {
                           context.read<LoginCubit>().login(
-                                emailController.text,
-                                passwordController.text,
-                              );
+                            emailController.text,
+                            passwordController.text,
+                          );
                         },
                   child: state is LoginRequested
                       ? const CircularProgressIndicator()
