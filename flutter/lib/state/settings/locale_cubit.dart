@@ -6,9 +6,7 @@ import 'package:phone_finder/state/settings/locale_state.dart';
 class LocaleCubit extends Cubit<LocaleState> {
   final LocaleStorage _storage;
 
-  LocaleCubit(this._storage) : super(const LocaleInitial()) {
-    loadLocale();
-  }
+  LocaleCubit(this._storage) : super(const LocaleInitial()) {}
 
   /// Load the saved locale from storage
   Future<void> loadLocale() async {
