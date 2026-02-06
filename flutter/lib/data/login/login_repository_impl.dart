@@ -23,8 +23,8 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<void> logout() async {
-    final accessToken = prefs.getString(key: _accessTokenKey);
-    final refreshToken = prefs.getString(key: _refreshTokenKey);
+    final accessToken = await prefs.getString(key: _accessTokenKey);
+    final refreshToken = await prefs.getString(key: _refreshTokenKey);
 
     if (accessToken != null && refreshToken != null) {
       final auth_api.User apiUser = auth_api.User(
@@ -40,8 +40,8 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<User?> getCurrentUser() async {
-    final accessToken = prefs.getString(key: _accessTokenKey);
-    final refreshToken = prefs.getString(key: _refreshTokenKey);
+    final accessToken = await prefs.getString(key: _accessTokenKey);
+    final refreshToken = await prefs.getString(key: _refreshTokenKey);
 
     if (accessToken == null || refreshToken == null) {
       return null;
