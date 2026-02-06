@@ -13,7 +13,8 @@ class LogoutCubit extends Cubit<LogoutState> {
     try {
       await logoutUseCase.execute();
       emit(LogoutSuccess());
-    } catch (e) {
+    } catch (e, stackTrace) {
+      addError(e, stackTrace); // Notify AppEventsObserver
       emit(LogoutError(e.toString()));
     }
   }

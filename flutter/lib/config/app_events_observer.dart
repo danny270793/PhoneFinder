@@ -1,4 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:phone_finder/config/dependency_injection.dart';
+import 'package:phone_finder/ui/pages/error_page.dart';
 
 class AppEventsObserver extends BlocObserver {
   @override
@@ -29,6 +32,9 @@ class AppEventsObserver extends BlocObserver {
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
     print('onError: ${bloc.runtimeType} - $error');
+    
+    // Navigate to error page on any unhandled error
+    _navigateToError();
   }
 
   @override
@@ -41,5 +47,17 @@ class AppEventsObserver extends BlocObserver {
   void onClose(BlocBase<dynamic> bloc) {
     super.onClose(bloc);
     print('onClose: ${bloc.runtimeType}');
+  }
+
+  void _navigateToError() {
+    try {
+      final router = getIt<GoRouter>();
+      // Avoid navigating if already on error page
+      if (router.routerDelegate.currentConfiguration.last.matchedLocation != ErrorPage.routeName) {
+        router.go(ErrorPage.routeName);
+      }
+    } catch (e) {
+      print('Failed to navigate to error page: $e');
+    }
   }
 }

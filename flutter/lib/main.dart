@@ -19,11 +19,13 @@ import 'config/url_strategy_web.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = AppEventsObserver();
 
   usePathUrlStrategy();
 
   await configureDependencies();
+
+  // Set observer after router is registered
+  Bloc.observer = AppEventsObserver();
 
   runApp(
     MultiBlocProvider(
@@ -55,6 +57,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _router = AppRoutes.getRouter(widget.routerCubit);
+    // Register router in get_it for global access (e.g., AppEventsObserver)
+    getIt.registerSingleton<GoRouter>(_router);
   }
 
   @override
