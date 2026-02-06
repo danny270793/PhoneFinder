@@ -98,8 +98,6 @@ class SettingsPage extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final themeCubit = context.read<ThemeCubit>();
     ThemeMode selectedTheme = themeCubit.currentThemeMode;
-    print('selectedTheme: $selectedTheme');
-    print('ThemeMode.light: ${ThemeMode.light}');
 
 
     showDialog(
@@ -148,56 +146,6 @@ class SettingsPage extends StatelessWidget {
                 ),
               ],
             ),
-          // content: Column(
-          //   mainAxisSize: MainAxisSize.min,
-          //   children: [
-          //     ListTile(
-          //       title: Text(l10n.themeLight),
-          //       leading: Icon(
-          //         selectedTheme == ThemeMode.light ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-          //       ),
-          //       trailing: const Icon(Icons.light_mode),
-          //       selected: selectedTheme == ThemeMode.light,
-          //       onTap: () {
-          //         setState(() {
-          //           selectedTheme = ThemeMode.light;
-          //         });
-          //         themeCubit.changeThemeMode(mode: ThemeMode.light);
-          //         Navigator.of(dialogContext).pop();
-          //       },
-          //     ),
-          //     ListTile(
-          //       title: Text(l10n.themeDark),
-          //       leading: Icon(
-          //         selectedTheme == ThemeMode.dark ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-          //       ),
-          //       trailing: const Icon(Icons.dark_mode),
-          //       selected: selectedTheme == ThemeMode.dark,
-          //       onTap: () {
-          //         setState(() {
-          //           selectedTheme = ThemeMode.dark;
-          //         });
-          //         themeCubit.changeThemeMode(mode: ThemeMode.dark);
-          //         Navigator.of(dialogContext).pop();
-          //       },
-          //     ),
-          //     ListTile(
-          //       title: Text(l10n.themeSystem),
-          //       leading: Icon(
-          //         selectedTheme == ThemeMode.system ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-          //       ),
-          //       trailing: const Icon(Icons.brightness_auto),
-          //       selected: selectedTheme == ThemeMode.system,
-          //       onTap: () {
-          //         setState(() {
-          //           selectedTheme = ThemeMode.system;
-          //         });
-          //         themeCubit.changeThemeMode(mode: ThemeMode.system);
-          //         Navigator.of(dialogContext).pop();
-          //       },
-          //     ),
-          //   ],
-          // ),
         ),
       ),
     );
