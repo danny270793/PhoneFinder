@@ -4,9 +4,7 @@ abstract class LocaleState {
   const LocaleState();
 }
 
-class LocaleInitial extends LocaleState {
-  const LocaleInitial();
-}
+class LocaleIdle extends LocaleState {}
 
 class LocaleLoaded extends LocaleState {
   final Locale locale;
