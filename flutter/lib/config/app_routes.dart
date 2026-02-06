@@ -85,6 +85,7 @@ class AppRoutes {
           state.matchedLocation,
         ),
     routes: AppRoutes.getRoutes(),
+    observers: [RouterNavigationObserver()],
   );
 }
 
@@ -100,4 +101,48 @@ class GoRouterRefreshStream extends ChangeNotifier {
     _subscription.cancel();
     super.dispose();
   }
+}
+
+class RouterNavigationObserver extends NavigatorObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
+    print('didPush: ${route.settings.name}');
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    super.didPop(route, previousRoute);
+    print('didPop: ${route.settings.name}');
+  }
+
+  @override
+  void didRemove(Route route, Route? previousRoute) {
+    super.didRemove(route, previousRoute);
+    print('didRemove: ${route.settings.name}');
+  }
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    print('didReplace: ${newRoute?.settings.name}');
+  }
+
+  // @override
+  // void didChangeTop(Route route, Route? previousRoute) {
+  //   super.didChangeTop(route, previousRoute);
+  //   print('didChangeTop: ${route.settings.name}');
+  // }
+
+  // @override
+  // void didStartUserGesture(Route route, Route? previousRoute) {
+  //   super.didStartUserGesture(route, previousRoute);
+  //   print('didStartUserGesture: ${route.settings.name}');
+  // }
+
+  // @override
+  // void didStopUserGesture() {
+  //   super.didStopUserGesture();
+  //   print('didStopUserGesture');
+  // }
 }
