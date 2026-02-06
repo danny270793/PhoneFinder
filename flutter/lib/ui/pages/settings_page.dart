@@ -98,6 +98,9 @@ class SettingsPage extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final themeCubit = context.read<ThemeCubit>();
     ThemeMode selectedTheme = themeCubit.currentThemeMode;
+    print('selectedTheme: $selectedTheme');
+    print('ThemeMode.light: ${ThemeMode.light}');
+
 
     showDialog(
       context: context,
@@ -105,55 +108,96 @@ class SettingsPage extends StatelessWidget {
         builder: (context, setState) => AlertDialog(
           title: Text(l10n.theme),
           content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text(l10n.themeLight),
-                leading: Icon(
-                  selectedTheme == ThemeMode.light ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  title: Text(l10n.themeLight),
+                  leading: Icon(
+                    selectedTheme == ThemeMode.light ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                  ),
+                  selected: selectedTheme == ThemeMode.light,
+                  trailing: const Icon(Icons.light_mode),
+                  onTap: () {
+                    themeCubit.changeThemeMode(mode: ThemeMode.light);
+                    Navigator.of(dialogContext).pop();
+                  },
                 ),
-                trailing: const Icon(Icons.light_mode),
-                selected: selectedTheme == ThemeMode.light,
-                onTap: () {
-                  setState(() {
-                    selectedTheme = ThemeMode.light;
-                  });
-                  themeCubit.changeThemeMode(mode: ThemeMode.light);
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-              ListTile(
-                title: Text(l10n.themeDark),
-                leading: Icon(
-                  selectedTheme == ThemeMode.dark ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                ListTile(
+                  title: Text(l10n.themeDark),
+                  leading: Icon(
+                    selectedTheme == ThemeMode.dark ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                  ),
+                  selected: selectedTheme == ThemeMode.dark,
+                  trailing: const Icon(Icons.dark_mode),
+                  onTap: () {
+                    themeCubit.changeThemeMode(mode: ThemeMode.dark);
+                    Navigator.of(dialogContext).pop();
+                  },
                 ),
-                trailing: const Icon(Icons.dark_mode),
-                selected: selectedTheme == ThemeMode.dark,
-                onTap: () {
-                  setState(() {
-                    selectedTheme = ThemeMode.dark;
-                  });
-                  themeCubit.changeThemeMode(mode: ThemeMode.dark);
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-              ListTile(
-                title: Text(l10n.themeSystem),
-                leading: Icon(
-                  selectedTheme == ThemeMode.system ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                ListTile(
+                  title: Text(l10n.themeSystem),
+                  leading: Icon(
+                    selectedTheme == ThemeMode.system ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                  ),
+                  selected: selectedTheme == ThemeMode.system,
+                  trailing: const Icon(Icons.brightness_auto),
+                  onTap: () {
+                    themeCubit.changeThemeMode(mode: ThemeMode.system);
+                    Navigator.of(dialogContext).pop();
+                  },
                 ),
-                trailing: const Icon(Icons.brightness_auto),
-                selected: selectedTheme == ThemeMode.system,
-                onTap: () {
-                  setState(() {
-                    selectedTheme = ThemeMode.system;
-                  });
-                  themeCubit.changeThemeMode(mode: ThemeMode.system);
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          ),
+              ],
+            ),
+          // content: Column(
+          //   mainAxisSize: MainAxisSize.min,
+          //   children: [
+          //     ListTile(
+          //       title: Text(l10n.themeLight),
+          //       leading: Icon(
+          //         selectedTheme == ThemeMode.light ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+          //       ),
+          //       trailing: const Icon(Icons.light_mode),
+          //       selected: selectedTheme == ThemeMode.light,
+          //       onTap: () {
+          //         setState(() {
+          //           selectedTheme = ThemeMode.light;
+          //         });
+          //         themeCubit.changeThemeMode(mode: ThemeMode.light);
+          //         Navigator.of(dialogContext).pop();
+          //       },
+          //     ),
+          //     ListTile(
+          //       title: Text(l10n.themeDark),
+          //       leading: Icon(
+          //         selectedTheme == ThemeMode.dark ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+          //       ),
+          //       trailing: const Icon(Icons.dark_mode),
+          //       selected: selectedTheme == ThemeMode.dark,
+          //       onTap: () {
+          //         setState(() {
+          //           selectedTheme = ThemeMode.dark;
+          //         });
+          //         themeCubit.changeThemeMode(mode: ThemeMode.dark);
+          //         Navigator.of(dialogContext).pop();
+          //       },
+          //     ),
+          //     ListTile(
+          //       title: Text(l10n.themeSystem),
+          //       leading: Icon(
+          //         selectedTheme == ThemeMode.system ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+          //       ),
+          //       trailing: const Icon(Icons.brightness_auto),
+          //       selected: selectedTheme == ThemeMode.system,
+          //       onTap: () {
+          //         setState(() {
+          //           selectedTheme = ThemeMode.system;
+          //         });
+          //         themeCubit.changeThemeMode(mode: ThemeMode.system);
+          //         Navigator.of(dialogContext).pop();
+          //       },
+          //     ),
+          //   ],
+          // ),
         ),
       ),
     );
