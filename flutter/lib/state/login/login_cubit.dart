@@ -7,15 +7,17 @@ class LoginCubit extends BaseCubit<LoginState> {
 
   LoginCubit(this.loginUseCase) : super(LoginIdle());
 
-  @override
-  LoginState createErrorState(String message) => LoginError(message);
-
   Future<void> login(String email, String password) async {
     emit(LoginRequested());
 
-    await safeExecute(() async {
-      await loginUseCase.execute(email, password);
-      emit(LoginSuccess());
-    });
+    await safeExecute(
+      () async {
+        await loginUseCase.execute(email, password);
+        emit(LoginSuccess());
+      },
+      onError: (error, stackTrace) {
+        emit(LoginError(error.toString()));
+      },
+    );
   }
 }
