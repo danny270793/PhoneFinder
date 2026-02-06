@@ -63,15 +63,6 @@ class SettingsPage extends StatelessWidget {
                 leading: Radio<String>(
                   value: 'en',
                   toggleable: false,
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        selectedLanguage = value;
-                      });
-                      localeCubit.changeLocale(languageCode: value);
-                      Navigator.of(dialogContext).pop();
-                    }
-                  },
                 ),
                 selected: selectedLanguage == 'en',
                 onTap: () {
@@ -88,15 +79,6 @@ class SettingsPage extends StatelessWidget {
                 leading: Radio<String>(
                   value: 'es',
                   toggleable: false,
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        selectedLanguage = value;
-                      });
-                      localeCubit.changeLocale(languageCode: value);
-                      Navigator.of(dialogContext).pop();
-                    }
-                  },
                 ),
                 selected: selectedLanguage == 'es',
                 onTap: () {
@@ -132,15 +114,6 @@ class SettingsPage extends StatelessWidget {
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.light,
                   toggleable: false,
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        selectedTheme = value;
-                      });
-                      themeCubit.changeThemeMode(mode: value);
-                      Navigator.of(dialogContext).pop();
-                    }
-                  },
                 ),
                 trailing: const Icon(Icons.light_mode),
                 selected: selectedTheme == ThemeMode.light,
@@ -157,15 +130,6 @@ class SettingsPage extends StatelessWidget {
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.dark,
                   toggleable: false,
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        selectedTheme = value;
-                      });
-                      themeCubit.changeThemeMode(mode: value);
-                      Navigator.of(dialogContext).pop();
-                    }
-                  },
                 ),
                 trailing: const Icon(Icons.dark_mode),
                 selected: selectedTheme == ThemeMode.dark,
@@ -182,15 +146,6 @@ class SettingsPage extends StatelessWidget {
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.system,
                   toggleable: false,
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        selectedTheme = value;
-                      });
-                      themeCubit.changeThemeMode(mode: value);
-                      Navigator.of(dialogContext).pop();
-                    }
-                  },
                 ),
                 trailing: const Icon(Icons.brightness_auto),
                 selected: selectedTheme == ThemeMode.system,
