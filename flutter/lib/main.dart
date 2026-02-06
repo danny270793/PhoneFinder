@@ -24,7 +24,6 @@ void main() async {
 
   await configureDependencies();
 
-  // Set observer after router is registered
   Bloc.observer = AppEventsObserver();
 
   runApp(
@@ -57,7 +56,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _router = AppRoutes.getRouter(widget.routerCubit);
-    // Register router in get_it for global access (e.g., AppEventsObserver)
     getIt.registerSingleton<GoRouter>(_router);
   }
 
