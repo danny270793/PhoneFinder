@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phone_finder/config/app_events_observer.dart';
 import 'package:phone_finder/config/app_routes.dart';
 import 'package:phone_finder/config/dependency_injection.dart';
 import 'package:phone_finder/l10n/app_localizations.dart';
