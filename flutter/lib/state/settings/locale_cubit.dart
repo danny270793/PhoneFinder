@@ -9,7 +9,7 @@ class LocaleCubit extends Cubit<LocaleState> {
   LocaleCubit(this._useCase) : super(const LocaleInitial()) {}
 
   Future<void> loadLocale() async {
-    final locale = _useCase.getLocaleOrDefault();
+    final locale = await _useCase.getLocaleOrDefault();
     emit(LocaleLoaded(locale));
   }
 
