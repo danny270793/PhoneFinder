@@ -12,18 +12,18 @@ class RouterCubit extends Cubit<RouterState> {
 
     try {
       final isLogged = await routerUseCase.execute();
-      emit(RouterCheckAuthSuccess(isLogged));
+      emit(RouterCheckAuthSuccess(isLogged: isLogged));
     } catch (e, stackTrace) {
-      addError(e, stackTrace); // Notify AppEventsObserver
-      emit(RouterCheckAuthError(e.toString()));
+      addError(e, stackTrace);
+      emit(RouterCheckAuthError(message: e.toString()));
     }
   }
 
   void onLoginSuccess() {
-    emit(RouterCheckAuthSuccess(true));
+    emit(RouterCheckAuthSuccess(isLogged: true));
   }
 
   void onLogoutSuccess() {
-    emit(RouterCheckAuthSuccess(false));
+    emit(RouterCheckAuthSuccess(isLogged: false));
   }
 }
