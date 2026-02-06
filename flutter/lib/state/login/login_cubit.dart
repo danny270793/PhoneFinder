@@ -14,8 +14,8 @@ class LoginCubit extends Cubit<LoginState> {
       await loginUseCase.execute(email: email, password: password);
       emit(LoginSuccess());
     } catch (e, stackTrace) {
-      addError(e, stackTrace); // Notify AppEventsObserver
-      emit(LoginError(e.toString()));
+      addError(e, stackTrace);
+      emit(LoginError(message: e.toString()));
     }
   }
 }
