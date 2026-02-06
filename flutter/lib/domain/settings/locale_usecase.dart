@@ -6,8 +6,8 @@ class LocaleUseCase {
 
   LocaleUseCase(this._repository);
 
-  Future<void> saveLocale(String languageCode) async {
-    await _repository.saveLocale(languageCode);
+  Future<void> saveLocale({required String languageCode}) async {
+    await _repository.saveLocale(languageCode: languageCode);
   }
 
   String? getLocale() {
