@@ -5,7 +5,7 @@ class LoginUseCase {
 
   LoginUseCase(this.repository);
 
-  Future<User> execute(String email, String password) {
+  Future<User> execute({required String email, required String password}) {
     if (email.isEmpty || password.isEmpty) {
       throw Exception('Invalid credentials');
     }
