@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phone_finder/core/logger.dart';
 import 'package:phone_finder/state/router/router_cubit.dart';
 import 'package:phone_finder/state/router/router_state.dart';
 import 'package:phone_finder/ui/pages/error_page.dart';
@@ -107,44 +108,44 @@ class RouterNavigationObserver extends NavigatorObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
     super.didPush(route, previousRoute);
-    print('didPush: ${route.settings.name}');
+    logger.d('didPush: ${route.settings.name}');
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
     super.didPop(route, previousRoute);
-    print('didPop: ${route.settings.name}');
+    logger.d('didPop: ${route.settings.name}');
   }
 
   @override
   void didRemove(Route route, Route? previousRoute) {
     super.didRemove(route, previousRoute);
-    print('didRemove: ${route.settings.name}');
+    logger.d('didRemove: ${route.settings.name}');
   }
 
   @override
   void didReplace({Route? newRoute, Route? oldRoute}) {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
-    print('didReplace: ${newRoute?.settings.name}');
+    logger.d('didReplace: ${newRoute?.settings.name}');
   }
 
   /*
   @override
   void didChangeTop(Route route, Route? previousRoute) {
     super.didChangeTop(route, previousRoute);
-    print('didChangeTop: ${route.settings.name}');
+    logger.d('didChangeTop: ${route.settings.name}');
   }
 
   @override
   void didStartUserGesture(Route route, Route? previousRoute) {
     super.didStartUserGesture(route, previousRoute);
-    print('didStartUserGesture: ${route.settings.name}');
+    logger.d('didStartUserGesture: ${route.settings.name}');
   }
 
   @override
   void didStopUserGesture() {
     super.didStopUserGesture();
-    print('didStopUserGesture');
+    logger.d('didStopUserGesture');
   }
   */
 }
