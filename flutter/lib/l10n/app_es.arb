@@ -1,0 +1,83 @@
+{
+  "@@locale": "es",
+  "appTitle": "Buscador de Teléfonos",
+  "@appTitle": {
+    "description": "El título de la aplicación"
+  },
+  "login": "Iniciar Sesión",
+  "@login": {
+    "description": "Botón e iniciar sesión y título de página"
+  },
+  "logout": "Cerrar Sesión",
+  "@logout": {
+    "description": "Texto del botón cerrar sesión"
+  },
+  "home": "Inicio",
+  "@home": {
+    "description": "Título de la página de inicio"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Título de la página de error"
+  },
+  "email": "Correo Electrónico",
+  "@email": {
+    "description": "Etiqueta del campo de correo"
+  },
+  "password": "Contraseña",
+  "@password": {
+    "description": "Etiqueta del campo de contraseña"
+  },
+  "emailHint": "Ingrese su correo electrónico",
+  "@emailHint": {
+    "description": "Texto de ayuda para el campo de correo"
+  },
+  "passwordHint": "Ingrese su contraseña",
+  "@passwordHint": {
+    "description": "Texto de ayuda para el campo de contraseña"
+  },
+  "loading": "Cargando...",
+  "@loading": {
+    "description": "Texto del indicador de carga"
+  },
+  "settings": "Configuración",
+  "@settings": {
+    "description": "Título de la página de configuración y texto del botón"
+  },
+  "language": "Idioma",
+  "@language": {
+    "description": "Etiqueta de selección de idioma"
+  },
+  "languageEnglish": "Inglés",
+  "@languageEnglish": {
+    "description": "Opción de idioma inglés"
+  },
+  "languageSpanish": "Español",
+  "@languageSpanish": {
+    "description": "Opción de idioma español"
+  },
+  "languageEnglishNative": "English",
+  "@languageEnglishNative": {
+    "description": "Nombre del idioma inglés en su forma nativa"
+  },
+  "languageSpanishNative": "Español",
+  "@languageSpanishNative": {
+    "description": "Nombre del idioma español en su forma nativa"
+  },
+  "theme": "Tema",
+  "@theme": {
+    "description": "Etiqueta de selección de tema"
+  },
+  "themeLight": "Claro",
+  "@themeLight": {
+    "description": "Opción de tema claro"
+  },
+  "themeDark": "Oscuro",
+  "@themeDark": {
+    "description": "Opción de tema oscuro"
+  },
+  "themeSystem": "Sistema",
+  "@themeSystem": {
+    "description": "Opción de tema del sistema (sigue la configuración del dispositivo)"
+  }
+}

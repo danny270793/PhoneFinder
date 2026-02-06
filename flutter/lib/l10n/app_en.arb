@@ -1,0 +1,83 @@
+{
+  "@@locale": "en",
+  "appTitle": "Phone Finder",
+  "@appTitle": {
+    "description": "The application title"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button and page title"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home page title"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error page title"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email input label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password input label"
+  },
+  "emailHint": "Enter your email",
+  "@emailHint": {
+    "description": "Email input hint text"
+  },
+  "passwordHint": "Enter your password",
+  "@passwordHint": {
+    "description": "Password input hint text"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings page title and button text"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language selection label"
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "English language option"
+  },
+  "languageSpanish": "Spanish",
+  "@languageSpanish": {
+    "description": "Spanish language option"
+  },
+  "languageEnglishNative": "English",
+  "@languageEnglishNative": {
+    "description": "English language name in its native form"
+  },
+  "languageSpanishNative": "Español",
+  "@languageSpanishNative": {
+    "description": "Spanish language name in its native form"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme selection label"
+  },
+  "themeLight": "Light",
+  "@themeLight": {
+    "description": "Light theme option"
+  },
+  "themeDark": "Dark",
+  "@themeDark": {
+    "description": "Dark theme option"
+  },
+  "themeSystem": "System",
+  "@themeSystem": {
+    "description": "System theme option (follows device settings)"
+  }
+}
