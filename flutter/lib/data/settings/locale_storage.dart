@@ -8,17 +8,17 @@ class LocaleStorageImpl implements LocaleRepository {
   LocaleStorageImpl(this._prefs);
 
   @override
-  Future<void> saveLocale(String languageCode) async {
-    await _prefs.setString(_localeKey, languageCode);
+  Future<void> saveLocale({required String languageCode}) async {
+    await _prefs.setString(key: _localeKey, value: languageCode);
   }
 
   @override
-  String? getLocale() {
-    return _prefs.getString(_localeKey);
+  Future<String?> getLocale() async {
+    return await _prefs.getString(key: _localeKey);
   }
 
   @override
   Future<void> clearLocale() async {
-    await _prefs.remove(_localeKey);
+    await _prefs.remove(key: _localeKey);
   }
 }

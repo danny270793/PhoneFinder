@@ -8,5 +8,5 @@ class LogoutSuccess extends LogoutState {}
 
 class LogoutError extends LogoutState {
   final String message;
-  LogoutError(this.message);
+  LogoutError({required this.message});
 }

@@ -6,16 +6,16 @@ import 'package:phone_finder/state/settings/locale_state.dart';
 class LocaleCubit extends Cubit<LocaleState> {
   final LocaleUseCase _useCase;
 
-  LocaleCubit(this._useCase) : super(const LocaleInitial()) {}
+  LocaleCubit(this._useCase) : super(LocaleIdle());
 
   Future<void> loadLocale() async {
-    final locale = _useCase.getLocaleOrDefault();
-    emit(LocaleLoaded(locale));
+    final locale = await _useCase.getLocaleOrDefault();
+    emit(LocaleLoaded(locale: locale));
   }
 
-  Future<void> changeLocale(String languageCode) async {
-    await _useCase.saveLocale(languageCode);
-    emit(LocaleChanged(Locale(languageCode)));
+  Future<void> changeLocale({required String languageCode}) async {
+    await _useCase.saveLocale(languageCode: languageCode);
+    emit(LocaleChanged(locale: Locale(languageCode)));
   }
 
   Locale get currentLocale {

@@ -1,7 +1,7 @@
 abstract class LocaleRepository {
-  Future<void> saveLocale(String languageCode);
+  Future<void> saveLocale({required String languageCode});
 
-  String? getLocale();
+  Future<String?> getLocale();
 
   Future<void> clearLocale();
 }

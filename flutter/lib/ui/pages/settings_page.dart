@@ -63,7 +63,7 @@ class SettingsPage extends StatelessWidget {
               groupValue: currentLanguage,
               onChanged: (value) {
                 if (value != null) {
-                  localeCubit.changeLocale(value);
+                  localeCubit.changeLocale(languageCode: value);
                   Navigator.of(dialogContext).pop();
                 }
               },
@@ -75,7 +75,7 @@ class SettingsPage extends StatelessWidget {
               groupValue: currentLanguage,
               onChanged: (value) {
                 if (value != null) {
-                  localeCubit.changeLocale(value);
+                  localeCubit.changeLocale(languageCode: value);
                   Navigator.of(dialogContext).pop();
                 }
               },
@@ -105,7 +105,7 @@ class SettingsPage extends StatelessWidget {
               groupValue: currentTheme,
               onChanged: (value) {
                 if (value != null) {
-                  themeCubit.changeThemeMode(value);
+                  themeCubit.changeThemeMode(mode: value);
                   Navigator.of(dialogContext).pop();
                 }
               },
@@ -117,7 +117,7 @@ class SettingsPage extends StatelessWidget {
               groupValue: currentTheme,
               onChanged: (value) {
                 if (value != null) {
-                  themeCubit.changeThemeMode(value);
+                  themeCubit.changeThemeMode(mode: value);
                   Navigator.of(dialogContext).pop();
                 }
               },
@@ -129,7 +129,7 @@ class SettingsPage extends StatelessWidget {
               groupValue: currentTheme,
               onChanged: (value) {
                 if (value != null) {
-                  themeCubit.changeThemeMode(value);
+                  themeCubit.changeThemeMode(mode: value);
                   Navigator.of(dialogContext).pop();
                 }
               },

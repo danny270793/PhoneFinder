@@ -23,19 +23,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 final getIt = GetIt.instance;
 
 Future<void> configureDependencies() async {
-  // External dependencies
   final prefs = await SharedPreferences.getInstance();
   getIt.registerSingleton<SharedPreferences>(prefs);
 
-  // Data layer - Storage
   getIt.registerLazySingleton<PreferencesRepository>(
     () => SharedPreferencesImpl(getIt<SharedPreferences>()),
   );
 
-  // Data layer - API
   getIt.registerLazySingleton<AuthApi>(() => AuthApi());
 
-  // Data layer - Repositories
   getIt.registerLazySingleton<LoginRepository>(
     () => LoginRepositoryImpl(
       getIt<AuthApi>(),
@@ -51,7 +47,6 @@ Future<void> configureDependencies() async {
     () => ThemeStorageImpl(getIt<PreferencesRepository>()),
   );
 
-  // Domain layer - Use cases
   getIt.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(getIt<LoginRepository>()),
   );
@@ -72,7 +67,6 @@ Future<void> configureDependencies() async {
     () => ThemeUseCase(getIt<ThemeRepository>()),
   );
 
-  // State layer - Cubits
   getIt.registerFactory<LoginCubit>(
     () => LoginCubit(getIt<LoginUseCase>()),
   );
@@ -93,7 +87,6 @@ Future<void> configureDependencies() async {
     () => ThemeCubit(getIt<ThemeUseCase>()),
   );
 
-  // Initialize cubits that need it
   await getIt<RouterCubit>().init();
   await getIt<LocaleCubit>().loadLocale();
   await getIt<ThemeCubit>().loadThemeMode();

@@ -33,7 +33,6 @@ class AppEventsObserver extends BlocObserver {
     super.onError(bloc, error, stackTrace);
     print('onError: ${bloc.runtimeType} - $error');
     
-    // Navigate to error page on any unhandled error
     _navigateToError();
   }
 
@@ -52,7 +51,6 @@ class AppEventsObserver extends BlocObserver {
   void _navigateToError() {
     try {
       final router = getIt<GoRouter>();
-      // Avoid navigating if already on error page
       if (router.routerDelegate.currentConfiguration.last.matchedLocation != ErrorPage.routeName) {
         router.go(ErrorPage.routeName);
       }

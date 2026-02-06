@@ -7,15 +7,15 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this.loginUseCase) : super(LoginIdle());
 
-  Future<void> login(String email, String password) async {
+  Future<void> login({required String email, required String password}) async {
     emit(LoginRequested());
 
     try {
-      await loginUseCase.execute(email, password);
+      await loginUseCase.execute(email: email, password: password);
       emit(LoginSuccess());
     } catch (e, stackTrace) {
-      addError(e, stackTrace); // Notify AppEventsObserver
-      emit(LoginError(e.toString()));
+      addError(e, stackTrace);
+      emit(LoginError(message: e.toString()));
     }
   }
 }

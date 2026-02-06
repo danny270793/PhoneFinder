@@ -128,21 +128,23 @@ class RouterNavigationObserver extends NavigatorObserver {
     print('didReplace: ${newRoute?.settings.name}');
   }
 
-  // @override
-  // void didChangeTop(Route route, Route? previousRoute) {
-  //   super.didChangeTop(route, previousRoute);
-  //   print('didChangeTop: ${route.settings.name}');
-  // }
+  /*
+  @override
+  void didChangeTop(Route route, Route? previousRoute) {
+    super.didChangeTop(route, previousRoute);
+    print('didChangeTop: ${route.settings.name}');
+  }
 
-  // @override
-  // void didStartUserGesture(Route route, Route? previousRoute) {
-  //   super.didStartUserGesture(route, previousRoute);
-  //   print('didStartUserGesture: ${route.settings.name}');
-  // }
+  @override
+  void didStartUserGesture(Route route, Route? previousRoute) {
+    super.didStartUserGesture(route, previousRoute);
+    print('didStartUserGesture: ${route.settings.name}');
+  }
 
-  // @override
-  // void didStopUserGesture() {
-  //   super.didStopUserGesture();
-  //   print('didStopUserGesture');
-  // }
+  @override
+  void didStopUserGesture() {
+    super.didStopUserGesture();
+    print('didStopUserGesture');
+  }
+  */
 }

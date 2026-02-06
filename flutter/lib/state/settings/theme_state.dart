@@ -4,18 +4,16 @@ abstract class ThemeState {
   const ThemeState();
 }
 
-class ThemeInitial extends ThemeState {
-  const ThemeInitial();
-}
+class ThemeIdle extends ThemeState {}
 
 class ThemeLoaded extends ThemeState {
   final ThemeMode themeMode;
 
-  const ThemeLoaded(this.themeMode);
+  const ThemeLoaded({required this.themeMode});
 }
 
 class ThemeChanged extends ThemeState {
   final ThemeMode themeMode;
 
-  const ThemeChanged(this.themeMode);
+  const ThemeChanged({required this.themeMode});
 }

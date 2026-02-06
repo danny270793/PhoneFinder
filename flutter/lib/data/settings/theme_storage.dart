@@ -9,13 +9,13 @@ class ThemeStorageImpl implements ThemeRepository {
   ThemeStorageImpl(this._prefs);
 
   @override
-  Future<void> saveThemeMode(ThemeMode mode) async {
-    await _prefs.setString(_themeModeKey, mode.name);
+  Future<void> saveThemeMode({required ThemeMode mode}) async {
+    await _prefs.setString(key: _themeModeKey, value: mode.name);
   }
 
   @override
-  ThemeMode? getThemeMode() {
-    final savedMode = _prefs.getString(_themeModeKey);
+  Future<ThemeMode?> getThemeMode() async {
+    final savedMode = await _prefs.getString(key: _themeModeKey);
     if (savedMode == null) return null;
 
     switch (savedMode) {
@@ -32,6 +32,6 @@ class ThemeStorageImpl implements ThemeRepository {
 
   @override
   Future<void> clearThemeMode() async {
-    await _prefs.remove(_themeModeKey);
+    await _prefs.remove(key: _themeModeKey);
   }
 }

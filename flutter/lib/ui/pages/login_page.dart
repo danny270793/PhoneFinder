@@ -56,8 +56,8 @@ class LoginPage extends StatelessWidget {
                       ? null
                       : () {
                           context.read<LoginCubit>().login(
-                            emailController.text,
-                            passwordController.text,
+                            email: emailController.text,
+                            password: passwordController.text,
                           );
                         },
                   child: state is LoginRequested

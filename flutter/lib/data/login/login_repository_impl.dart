@@ -13,35 +13,35 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<User> login({required String email, required String password}) async {
-    final auth_api.User user = await api.login(email, password);
+    final auth_api.User user = await api.login(email: email, password: password);
 
-    await prefs.setString(_accessTokenKey, user.accessToken);
-    await prefs.setString(_refreshTokenKey, user.refreshToken);
+    await prefs.setString(key: _accessTokenKey, value: user.accessToken);
+    await prefs.setString(key: _refreshTokenKey, value: user.refreshToken);
 
     return User(accessToken: user.accessToken, refreshToken: user.refreshToken);
   }
 
   @override
   Future<void> logout() async {
-    final accessToken = prefs.getString(_accessTokenKey);
-    final refreshToken = prefs.getString(_refreshTokenKey);
+    final accessToken = await prefs.getString(key: _accessTokenKey);
+    final refreshToken = await prefs.getString(key: _refreshTokenKey);
 
     if (accessToken != null && refreshToken != null) {
       final auth_api.User apiUser = auth_api.User(
         accessToken: accessToken,
         refreshToken: refreshToken,
       );
-      await api.logout(apiUser);
+      await api.logout(user: apiUser);
     }
 
-    await prefs.remove(_accessTokenKey);
-    await prefs.remove(_refreshTokenKey);
+    await prefs.remove(key: _accessTokenKey);
+    await prefs.remove(key: _refreshTokenKey);
   }
 
   @override
   Future<User?> getCurrentUser() async {
-    final accessToken = prefs.getString(_accessTokenKey);
-    final refreshToken = prefs.getString(_refreshTokenKey);
+    final accessToken = await prefs.getString(key: _accessTokenKey);
+    final refreshToken = await prefs.getString(key: _refreshTokenKey);
 
     if (accessToken == null || refreshToken == null) {
       return null;

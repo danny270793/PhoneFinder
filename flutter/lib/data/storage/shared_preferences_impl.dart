@@ -7,22 +7,22 @@ class SharedPreferencesImpl implements PreferencesRepository {
   SharedPreferencesImpl(this._prefs);
 
   @override
-  Future<void> setString(String key, String value) async {
+  Future<void> setString({required String key, required String value}) async {
     await _prefs.setString(key, value);
   }
 
   @override
-  String? getString(String key) {
+  Future<String?> getString({required String key}) async {
     return _prefs.getString(key);
   }
 
   @override
-  Future<void> remove(String key) async {
+  Future<void> remove({required String key}) async {
     await _prefs.remove(key);
   }
 
   @override
-  bool containsKey(String key) {
+  Future<bool> containsKey({required String key}) async {
     return _prefs.containsKey(key);
   }
 }

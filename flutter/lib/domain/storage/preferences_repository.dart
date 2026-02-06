@@ -1,6 +1,6 @@
 abstract class PreferencesRepository {
-  Future<void> setString(String key, String value);
-  String? getString(String key);
-  Future<void> remove(String key);
-  bool containsKey(String key);
+  Future<void> setString({required String key, required String value});
+  Future<String?> getString({required String key});
+  Future<void> remove({required String key});
+  Future<bool> containsKey({required String key});
 }
