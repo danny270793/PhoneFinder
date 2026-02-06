@@ -23,6 +23,7 @@ class LocaleUseCase {
     if (savedLocale != null) {
       return Locale(savedLocale);
     }
-    return const Locale('en');
+    final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
+    return deviceLocale;
   }
 }
