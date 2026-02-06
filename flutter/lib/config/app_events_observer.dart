@@ -1,37 +1,38 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phone_finder/config/dependency_injection.dart';
+import 'package:phone_finder/core/logger.dart';
 import 'package:phone_finder/ui/pages/error_page.dart';
 
 class AppEventsObserver extends BlocObserver {
   @override
   void onCreate(BlocBase<dynamic> bloc) {
     super.onCreate(bloc);
-    print('onCreate: ${bloc.runtimeType}');
+    logger.d('onCreate: ${bloc.runtimeType}');
   }
 
   @override
   void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
     super.onEvent(bloc, event);
-    print('onEvent: ${bloc.runtimeType} - $event');
+    logger.d('onEvent: ${bloc.runtimeType} - $event');
   }
   
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
-    print('onChange: ${bloc.runtimeType} - $change');
+    logger.d('onChange: ${bloc.runtimeType} - $change');
   }
 
   @override
   void onTransition(Bloc<dynamic, dynamic> bloc, Transition<dynamic, dynamic> transition) {
     super.onTransition(bloc, transition);
-    print('onTransition: ${bloc.runtimeType} - $transition');
+    logger.d('onTransition: ${bloc.runtimeType} - $transition');
   }
   
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
-    print('onError: ${bloc.runtimeType} - $error');
+    logger.e('onError: ${bloc.runtimeType}', error: error, stackTrace: stackTrace);
     
     _navigateToError();
   }
@@ -39,13 +40,13 @@ class AppEventsObserver extends BlocObserver {
   @override
   void onDone(Bloc<dynamic, dynamic> bloc, Object? event, [Object? error, StackTrace? stackTrace]) {
     super.onDone(bloc, event, error, stackTrace);
-    print('onDone: ${bloc.runtimeType} - $event - $error - $stackTrace');
+    logger.d('onDone: ${bloc.runtimeType} - event: $event - error: $error');
   }
   
   @override
   void onClose(BlocBase<dynamic> bloc) {
     super.onClose(bloc);
-    print('onClose: ${bloc.runtimeType}');
+    logger.d('onClose: ${bloc.runtimeType}');
   }
 
   void _navigateToError() {
@@ -55,7 +56,7 @@ class AppEventsObserver extends BlocObserver {
         router.go(ErrorPage.routeName);
       }
     } catch (e) {
-      print('Failed to navigate to error page: $e');
+      logger.e('Failed to navigate to error page', error: e);
     }
   }
 }
