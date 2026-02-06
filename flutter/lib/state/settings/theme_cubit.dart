@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_finder/domain/settings/theme_usecase.dart';
-import 'package:phone_finder/state/base_cubit.dart';
 import 'package:phone_finder/state/settings/theme_state.dart';
 
-class ThemeCubit extends BaseCubit<ThemeState> {
+class ThemeCubit extends Cubit<ThemeState> {
   final ThemeUseCase _useCase;
 
   ThemeCubit(this._useCase) : super(const ThemeInitial());
 
   Future<void> loadThemeMode() async {
-    await safeExecute(() async {
-      final themeMode = _useCase.getThemeModeOrDefault();
-      emit(ThemeLoaded(themeMode));
-    });
+    final themeMode = _useCase.getThemeModeOrDefault();
+    emit(ThemeLoaded(themeMode));
   }
 
   Future<void> changeThemeMode(ThemeMode mode) async {
-    await safeExecute(() async {
-      await _useCase.saveThemeMode(mode);
-      emit(ThemeChanged(mode));
-    });
+    await _useCase.saveThemeMode(mode);
+    emit(ThemeChanged(mode));
   }
 
   ThemeMode get currentThemeMode {
