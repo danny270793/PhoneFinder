@@ -14,8 +14,8 @@ class ThemeStorageImpl implements ThemeRepository {
   }
 
   @override
-  ThemeMode? getThemeMode() {
-    final savedMode = _prefs.getString(key: _themeModeKey);
+  Future<ThemeMode?> getThemeMode() async {
+    final savedMode = await _prefs.getString(key: _themeModeKey);
     if (savedMode == null) return null;
 
     switch (savedMode) {
