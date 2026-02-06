@@ -6,7 +6,7 @@ import 'package:phone_finder/state/settings/theme_state.dart';
 class ThemeCubit extends Cubit<ThemeState> {
   final ThemeUseCase _useCase;
 
-  ThemeCubit(this._useCase) : super(const ThemeInitial());
+  ThemeCubit(this._useCase) : super(ThemeIdle());
 
   Future<void> loadThemeMode() async {
     final themeMode = await _useCase.getThemeModeOrDefault();
