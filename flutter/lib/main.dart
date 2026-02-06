@@ -18,6 +18,7 @@ import 'config/url_strategy_web.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = AppEventsObserver();
 
   usePathUrlStrategy();
 
