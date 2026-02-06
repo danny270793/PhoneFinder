@@ -47,7 +47,7 @@ class SettingsPage extends StatelessWidget {
   void _showLanguageDialog(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final localeCubit = context.read<LocaleCubit>();
-    final currentLanguage = localeCubit.currentLocale.languageCode;
+    String selectedLanguage = localeCubit.currentLocale.languageCode;
 
     showDialog(
       context: context,
@@ -62,15 +62,21 @@ class SettingsPage extends StatelessWidget {
                 subtitle: Text(l10n.languageEnglishNative),
                 leading: Radio<String>(
                   value: 'en',
-                  groupValue: currentLanguage,
+                  groupValue: selectedLanguage,
                   onChanged: (value) {
                     if (value != null) {
+                      setState(() {
+                        selectedLanguage = value;
+                      });
                       localeCubit.changeLocale(languageCode: value);
                       Navigator.of(dialogContext).pop();
                     }
                   },
                 ),
                 onTap: () {
+                  setState(() {
+                    selectedLanguage = 'en';
+                  });
                   localeCubit.changeLocale(languageCode: 'en');
                   Navigator.of(dialogContext).pop();
                 },
@@ -80,15 +86,21 @@ class SettingsPage extends StatelessWidget {
                 subtitle: Text(l10n.languageSpanishNative),
                 leading: Radio<String>(
                   value: 'es',
-                  groupValue: currentLanguage,
+                  groupValue: selectedLanguage,
                   onChanged: (value) {
                     if (value != null) {
+                      setState(() {
+                        selectedLanguage = value;
+                      });
                       localeCubit.changeLocale(languageCode: value);
                       Navigator.of(dialogContext).pop();
                     }
                   },
                 ),
                 onTap: () {
+                  setState(() {
+                    selectedLanguage = 'es';
+                  });
                   localeCubit.changeLocale(languageCode: 'es');
                   Navigator.of(dialogContext).pop();
                 },
@@ -103,7 +115,7 @@ class SettingsPage extends StatelessWidget {
   void _showThemeDialog(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final themeCubit = context.read<ThemeCubit>();
-    final currentTheme = themeCubit.currentThemeMode;
+    ThemeMode selectedTheme = themeCubit.currentThemeMode;
 
     showDialog(
       context: context,
@@ -117,9 +129,12 @@ class SettingsPage extends StatelessWidget {
                 title: Text(l10n.themeLight),
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.light,
-                  groupValue: currentTheme,
+                  groupValue: selectedTheme,
                   onChanged: (value) {
                     if (value != null) {
+                      setState(() {
+                        selectedTheme = value;
+                      });
                       themeCubit.changeThemeMode(mode: value);
                       Navigator.of(dialogContext).pop();
                     }
@@ -127,6 +142,9 @@ class SettingsPage extends StatelessWidget {
                 ),
                 trailing: const Icon(Icons.light_mode),
                 onTap: () {
+                  setState(() {
+                    selectedTheme = ThemeMode.light;
+                  });
                   themeCubit.changeThemeMode(mode: ThemeMode.light);
                   Navigator.of(dialogContext).pop();
                 },
@@ -135,9 +153,12 @@ class SettingsPage extends StatelessWidget {
                 title: Text(l10n.themeDark),
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.dark,
-                  groupValue: currentTheme,
+                  groupValue: selectedTheme,
                   onChanged: (value) {
                     if (value != null) {
+                      setState(() {
+                        selectedTheme = value;
+                      });
                       themeCubit.changeThemeMode(mode: value);
                       Navigator.of(dialogContext).pop();
                     }
@@ -145,6 +166,9 @@ class SettingsPage extends StatelessWidget {
                 ),
                 trailing: const Icon(Icons.dark_mode),
                 onTap: () {
+                  setState(() {
+                    selectedTheme = ThemeMode.dark;
+                  });
                   themeCubit.changeThemeMode(mode: ThemeMode.dark);
                   Navigator.of(dialogContext).pop();
                 },
@@ -153,9 +177,12 @@ class SettingsPage extends StatelessWidget {
                 title: Text(l10n.themeSystem),
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.system,
-                  groupValue: currentTheme,
+                  groupValue: selectedTheme,
                   onChanged: (value) {
                     if (value != null) {
+                      setState(() {
+                        selectedTheme = value;
+                      });
                       themeCubit.changeThemeMode(mode: value);
                       Navigator.of(dialogContext).pop();
                     }
@@ -163,6 +190,9 @@ class SettingsPage extends StatelessWidget {
                 ),
                 trailing: const Icon(Icons.brightness_auto),
                 onTap: () {
+                  setState(() {
+                    selectedTheme = ThemeMode.system;
+                  });
                   themeCubit.changeThemeMode(mode: ThemeMode.system);
                   Navigator.of(dialogContext).pop();
                 },
