@@ -8,6 +8,9 @@ class LocaleCubit extends BaseCubit<LocaleState> {
 
   LocaleCubit(this._useCase) : super(const LocaleInitial()) {}
 
+  @override
+  LocaleState createErrorState(String message) => LocaleError(message);
+
   Future<void> loadLocale() async {
     await safeExecute(() async {
       final locale = _useCase.getLocaleOrDefault();
