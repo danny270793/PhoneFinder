@@ -60,9 +60,8 @@ class SettingsPage extends StatelessWidget {
               ListTile(
                 title: Text(l10n.languageEnglish),
                 subtitle: Text(l10n.languageEnglishNative),
-                leading: Radio<String>(
-                  value: 'en',
-                  toggleable: false,
+                leading: Icon(
+                  selectedLanguage == 'en' ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                 ),
                 selected: selectedLanguage == 'en',
                 onTap: () {
@@ -76,9 +75,8 @@ class SettingsPage extends StatelessWidget {
               ListTile(
                 title: Text(l10n.languageSpanish),
                 subtitle: Text(l10n.languageSpanishNative),
-                leading: Radio<String>(
-                  value: 'es',
-                  toggleable: false,
+                leading: Icon(
+                  selectedLanguage == 'es' ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                 ),
                 selected: selectedLanguage == 'es',
                 onTap: () {
@@ -111,9 +109,8 @@ class SettingsPage extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(l10n.themeLight),
-                leading: Radio<ThemeMode>(
-                  value: ThemeMode.light,
-                  toggleable: false,
+                leading: Icon(
+                  selectedTheme == ThemeMode.light ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                 ),
                 trailing: const Icon(Icons.light_mode),
                 selected: selectedTheme == ThemeMode.light,
@@ -127,9 +124,8 @@ class SettingsPage extends StatelessWidget {
               ),
               ListTile(
                 title: Text(l10n.themeDark),
-                leading: Radio<ThemeMode>(
-                  value: ThemeMode.dark,
-                  toggleable: false,
+                leading: Icon(
+                  selectedTheme == ThemeMode.dark ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                 ),
                 trailing: const Icon(Icons.dark_mode),
                 selected: selectedTheme == ThemeMode.dark,
@@ -143,9 +139,8 @@ class SettingsPage extends StatelessWidget {
               ),
               ListTile(
                 title: Text(l10n.themeSystem),
-                leading: Radio<ThemeMode>(
-                  value: ThemeMode.system,
-                  toggleable: false,
+                leading: Icon(
+                  selectedTheme == ThemeMode.system ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                 ),
                 trailing: const Icon(Icons.brightness_auto),
                 selected: selectedTheme == ThemeMode.system,
