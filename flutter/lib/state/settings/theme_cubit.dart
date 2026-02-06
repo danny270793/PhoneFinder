@@ -10,12 +10,12 @@ class ThemeCubit extends Cubit<ThemeState> {
 
   Future<void> loadThemeMode() async {
     final themeMode = await _useCase.getThemeModeOrDefault();
-    emit(ThemeLoaded(themeMode));
+    emit(ThemeLoaded(themeMode: themeMode));
   }
 
   Future<void> changeThemeMode({required ThemeMode mode}) async {
     await _useCase.saveThemeMode(mode: mode);
-    emit(ThemeChanged(mode));
+    emit(ThemeChanged(themeMode: mode));
   }
 
   ThemeMode get currentThemeMode {
