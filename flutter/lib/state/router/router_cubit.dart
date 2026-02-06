@@ -7,17 +7,19 @@ class RouterCubit extends BaseCubit<RouterState> {
 
   RouterCubit(this.routerUseCase) : super(RouterIdle()) {}
 
-  @override
-  RouterState createErrorState(String message) => RouterCheckAuthError(message);
-
   Future<void> init() async {
     emit(RouterCheckAuthRequested());
 
-    await safeExecute(() async {
-      await Future.delayed(const Duration(seconds: 1));
-      final isLogged = await routerUseCase.execute();
-      emit(RouterCheckAuthSuccess(isLogged));
-    });
+    await safeExecute(
+      () async {
+        await Future.delayed(const Duration(seconds: 1));
+        final isLogged = await routerUseCase.execute();
+        emit(RouterCheckAuthSuccess(isLogged));
+      },
+      onError: (error, stackTrace) {
+        emit(RouterCheckAuthError(error.toString()));
+      },
+    );
   }
 
   void onLoginSuccess() {
