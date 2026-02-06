@@ -1,8 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_finder/domain/login/login_usecase.dart';
+import 'package:phone_finder/state/base_cubit.dart';
 import 'package:phone_finder/state/login/login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LoginCubit extends BaseCubit<LoginState> {
   final LoginUseCase loginUseCase;
 
   LoginCubit(this.loginUseCase) : super(LoginIdle());
@@ -10,11 +10,14 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login(String email, String password) async {
     emit(LoginRequested());
 
-    try {
-      await loginUseCase.execute(email, password);
-      emit(LoginSuccess());
-    } catch (e) {
-      emit(LoginError(e.toString()));
-    }
+    await safeExecute(
+      () async {
+        await loginUseCase.execute(email, password);
+        emit(LoginSuccess());
+      },
+      onError: (error, stackTrace) {
+        emit(LoginError(error.toString()));
+      },
+    );
   }
 }
