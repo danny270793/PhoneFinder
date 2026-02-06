@@ -62,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                 subtitle: Text(l10n.languageEnglishNative),
                 leading: Radio<String>(
                   value: 'en',
-                  groupValue: selectedLanguage,
+                  toggleable: false,
                   onChanged: (value) {
                     if (value != null) {
                       setState(() {
@@ -73,6 +73,7 @@ class SettingsPage extends StatelessWidget {
                     }
                   },
                 ),
+                selected: selectedLanguage == 'en',
                 onTap: () {
                   setState(() {
                     selectedLanguage = 'en';
@@ -86,7 +87,7 @@ class SettingsPage extends StatelessWidget {
                 subtitle: Text(l10n.languageSpanishNative),
                 leading: Radio<String>(
                   value: 'es',
-                  groupValue: selectedLanguage,
+                  toggleable: false,
                   onChanged: (value) {
                     if (value != null) {
                       setState(() {
@@ -97,6 +98,7 @@ class SettingsPage extends StatelessWidget {
                     }
                   },
                 ),
+                selected: selectedLanguage == 'es',
                 onTap: () {
                   setState(() {
                     selectedLanguage = 'es';
@@ -129,7 +131,7 @@ class SettingsPage extends StatelessWidget {
                 title: Text(l10n.themeLight),
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.light,
-                  groupValue: selectedTheme,
+                  toggleable: false,
                   onChanged: (value) {
                     if (value != null) {
                       setState(() {
@@ -141,6 +143,7 @@ class SettingsPage extends StatelessWidget {
                   },
                 ),
                 trailing: const Icon(Icons.light_mode),
+                selected: selectedTheme == ThemeMode.light,
                 onTap: () {
                   setState(() {
                     selectedTheme = ThemeMode.light;
@@ -153,7 +156,7 @@ class SettingsPage extends StatelessWidget {
                 title: Text(l10n.themeDark),
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.dark,
-                  groupValue: selectedTheme,
+                  toggleable: false,
                   onChanged: (value) {
                     if (value != null) {
                       setState(() {
@@ -165,6 +168,7 @@ class SettingsPage extends StatelessWidget {
                   },
                 ),
                 trailing: const Icon(Icons.dark_mode),
+                selected: selectedTheme == ThemeMode.dark,
                 onTap: () {
                   setState(() {
                     selectedTheme = ThemeMode.dark;
@@ -177,7 +181,7 @@ class SettingsPage extends StatelessWidget {
                 title: Text(l10n.themeSystem),
                 leading: Radio<ThemeMode>(
                   value: ThemeMode.system,
-                  groupValue: selectedTheme,
+                  toggleable: false,
                   onChanged: (value) {
                     if (value != null) {
                       setState(() {
@@ -189,6 +193,7 @@ class SettingsPage extends StatelessWidget {
                   },
                 ),
                 trailing: const Icon(Icons.brightness_auto),
+                selected: selectedTheme == ThemeMode.system,
                 onTap: () {
                   setState(() {
                     selectedTheme = ThemeMode.system;
