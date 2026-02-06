@@ -5,7 +5,7 @@ import 'package:phone_finder/state/router/router_state.dart';
 class RouterCubit extends Cubit<RouterState> {
   final RouterUseCase routerUseCase;
 
-  RouterCubit(this.routerUseCase) : super(RouterIdle()) {}
+  RouterCubit(this.routerUseCase) : super(RouterIdle());
 
   Future<void> init() async {
     emit(RouterCheckAuthRequested());
