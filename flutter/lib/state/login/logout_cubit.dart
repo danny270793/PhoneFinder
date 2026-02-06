@@ -7,17 +7,15 @@ class LogoutCubit extends BaseCubit<LogoutState> {
 
   LogoutCubit(this.logoutUseCase) : super(LogoutIdle());
 
+  @override
+  LogoutState createErrorState(String message) => LogoutError(message);
+
   Future<void> logout() async {
     emit(LogoutRequested());
 
-    await safeExecute(
-      () async {
-        await logoutUseCase.execute();
-        emit(LogoutSuccess());
-      },
-      onError: (error, stackTrace) {
-        emit(LogoutError(error.toString()));
-      },
-    );
+    await safeExecute(() async {
+      await logoutUseCase.execute();
+      emit(LogoutSuccess());
+    });
   }
 }
