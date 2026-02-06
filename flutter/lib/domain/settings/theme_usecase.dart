@@ -6,8 +6,8 @@ class ThemeUseCase {
 
   ThemeUseCase(this._repository);
 
-  Future<void> saveThemeMode(ThemeMode mode) async {
-    await _repository.saveThemeMode(mode);
+  Future<void> saveThemeMode({required ThemeMode mode}) async {
+    await _repository.saveThemeMode(mode: mode);
   }
 
   ThemeMode? getThemeMode() {
