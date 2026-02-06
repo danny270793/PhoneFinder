@@ -13,8 +13,8 @@ class LocaleStorageImpl implements LocaleRepository {
   }
 
   @override
-  String? getLocale() {
-    return _prefs.getString(key: _localeKey);
+  Future<String?> getLocale() async {
+    return await _prefs.getString(key: _localeKey);
   }
 
   @override
