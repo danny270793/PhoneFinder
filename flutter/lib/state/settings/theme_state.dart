@@ -4,9 +4,7 @@ abstract class ThemeState {
   const ThemeState();
 }
 
-class ThemeInitial extends ThemeState {
-  const ThemeInitial();
-}
+class ThemeIdle extends ThemeState {}
 
 class ThemeLoaded extends ThemeState {
   final ThemeMode themeMode;
