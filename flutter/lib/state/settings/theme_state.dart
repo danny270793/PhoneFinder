@@ -19,3 +19,9 @@ class ThemeChanged extends ThemeState {
 
   const ThemeChanged(this.themeMode);
 }
+
+class ThemeError extends ThemeState {
+  final String message;
+
+  const ThemeError(this.message);
+}
