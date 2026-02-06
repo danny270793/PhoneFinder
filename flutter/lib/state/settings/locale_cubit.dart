@@ -10,12 +10,12 @@ class LocaleCubit extends Cubit<LocaleState> {
 
   Future<void> loadLocale() async {
     final locale = await _useCase.getLocaleOrDefault();
-    emit(LocaleLoaded(locale));
+    emit(LocaleLoaded(locale: locale));
   }
 
   Future<void> changeLocale({required String languageCode}) async {
     await _useCase.saveLocale(languageCode: languageCode);
-    emit(LocaleChanged(Locale(languageCode)));
+    emit(LocaleChanged(locale: Locale(languageCode)));
   }
 
   Locale get currentLocale {
