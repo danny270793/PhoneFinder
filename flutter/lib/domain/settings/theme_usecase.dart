@@ -10,16 +10,16 @@ class ThemeUseCase {
     await _repository.saveThemeMode(mode: mode);
   }
 
-  ThemeMode? getThemeMode() {
-    return _repository.getThemeMode();
+  Future<ThemeMode?> getThemeMode() async {
+    return await _repository.getThemeMode();
   }
 
   Future<void> clearThemeMode() async {
     await _repository.clearThemeMode();
   }
 
-  ThemeMode getThemeModeOrDefault() {
-    final savedTheme = _repository.getThemeMode();
+  Future<ThemeMode> getThemeModeOrDefault() async {
+    final savedTheme = await _repository.getThemeMode();
     if (savedTheme != null) {
       return savedTheme;
     }
