@@ -10,16 +10,16 @@ class LocaleUseCase {
     await _repository.saveLocale(languageCode: languageCode);
   }
 
-  String? getLocale() {
-    return _repository.getLocale();
+  Future<String?> getLocale() async {
+    return await _repository.getLocale();
   }
 
   Future<void> clearLocale() async {
     await _repository.clearLocale();
   }
 
-  Locale getLocaleOrDefault() {
-    final savedLocale = _repository.getLocale();
+  Future<Locale> getLocaleOrDefault() async {
+    final savedLocale = await _repository.getLocale();
     if (savedLocale != null) {
       return Locale(savedLocale);
     }
