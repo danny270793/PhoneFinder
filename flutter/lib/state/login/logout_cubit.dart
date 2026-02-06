@@ -1,8 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_finder/domain/login/logout_usecase.dart';
+import 'package:phone_finder/state/base_cubit.dart';
 import 'package:phone_finder/state/login/logout_state.dart';
 
-class LogoutCubit extends Cubit<LogoutState> {
+class LogoutCubit extends BaseCubit<LogoutState> {
   final LogoutUseCase logoutUseCase;
 
   LogoutCubit(this.logoutUseCase) : super(LogoutIdle());
@@ -10,11 +10,14 @@ class LogoutCubit extends Cubit<LogoutState> {
   Future<void> logout() async {
     emit(LogoutRequested());
 
-    try {
-      await logoutUseCase.execute();
-      emit(LogoutSuccess());
-    } catch (e) {
-      emit(LogoutError(e.toString()));
-    }
+    await safeExecute(
+      () async {
+        await logoutUseCase.execute();
+        emit(LogoutSuccess());
+      },
+      onError: (error, stackTrace) {
+        emit(LogoutError(error.toString()));
+      },
+    );
   }
 }
