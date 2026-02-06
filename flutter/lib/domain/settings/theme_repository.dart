@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class ThemeRepository {
-  Future<void> saveThemeMode(ThemeMode mode);
+  Future<void> saveThemeMode({required ThemeMode mode});
 
   ThemeMode? getThemeMode();
 
