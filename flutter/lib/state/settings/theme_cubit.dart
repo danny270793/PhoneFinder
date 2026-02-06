@@ -9,7 +9,7 @@ class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit(this._useCase) : super(const ThemeInitial());
 
   Future<void> loadThemeMode() async {
-    final themeMode = _useCase.getThemeModeOrDefault();
+    final themeMode = await _useCase.getThemeModeOrDefault();
     emit(ThemeLoaded(themeMode));
   }
 
