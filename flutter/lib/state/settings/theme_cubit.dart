@@ -8,6 +8,9 @@ class ThemeCubit extends BaseCubit<ThemeState> {
 
   ThemeCubit(this._useCase) : super(const ThemeInitial());
 
+  @override
+  ThemeState createErrorState(String message) => ThemeError(message);
+
   Future<void> loadThemeMode() async {
     await safeExecute(() async {
       final themeMode = _useCase.getThemeModeOrDefault();
