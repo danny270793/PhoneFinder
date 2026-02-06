@@ -19,3 +19,9 @@ class LocaleChanged extends LocaleState {
 
   const LocaleChanged(this.locale);
 }
+
+class LocaleError extends LocaleState {
+  final String message;
+
+  const LocaleError(this.message);
+}
