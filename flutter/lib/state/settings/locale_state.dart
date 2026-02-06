@@ -9,11 +9,11 @@ class LocaleIdle extends LocaleState {}
 class LocaleLoaded extends LocaleState {
   final Locale locale;
 
-  const LocaleLoaded(this.locale);
+  const LocaleLoaded({required this.locale});
 }
 
 class LocaleChanged extends LocaleState {
   final Locale locale;
 
-  const LocaleChanged(this.locale);
+  const LocaleChanged({required this.locale});
 }
