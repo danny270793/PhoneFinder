@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:phone_finder/data/login/login_api.dart';
 import 'package:phone_finder/data/login/login_repository.dart';
@@ -97,4 +98,41 @@ Future<void> configureDependencies() async {
   await getIt<RouterCubit>().init();
   await getIt<LocaleCubit>().loadLocale();
   await getIt<ThemeCubit>().loadThemeMode();
+}
+
+class AppEventsObserver extends BlocObserver {
+  @override
+  void onCreate(BlocBase<dynamic> bloc) {
+    print('onCreate: ${bloc.runtimeType}');
+  }
+
+  @override
+  void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
+    print('onEvent: ${bloc.runtimeType} - $event');
+  }
+  
+  @override
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
+    print('onChange: ${bloc.runtimeType} - $change');
+  }
+
+  @override
+  void onTransition(Bloc<dynamic, dynamic> bloc, Transition<dynamic, dynamic> transition) {
+    print('onTransition: ${bloc.runtimeType} - $transition');
+  }
+  
+  @override
+  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
+    print('onError: ${bloc.runtimeType} - $error');
+  }
+
+  @override
+  void onDone(Bloc<dynamic, dynamic> bloc, Object? event, [Object? error, StackTrace? stackTrace]) {
+    print('onDone: ${bloc.runtimeType} - $event - $error - $stackTrace');
+  }
+  
+  @override
+  void onClose(BlocBase<dynamic> bloc) {
+    print('onClose: ${bloc.runtimeType}');
+  }
 }
