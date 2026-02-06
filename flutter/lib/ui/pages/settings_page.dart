@@ -51,36 +51,50 @@ class SettingsPage extends StatelessWidget {
 
     showDialog(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.language),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RadioListTile<String>(
-              title: Text(l10n.languageEnglish),
-              subtitle: Text(l10n.languageEnglishNative),
-              value: 'en',
-              groupValue: currentLanguage,
-              onChanged: (value) {
-                if (value != null) {
-                  localeCubit.changeLocale(languageCode: value);
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Text(l10n.language),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: Text(l10n.languageEnglish),
+                subtitle: Text(l10n.languageEnglishNative),
+                leading: Radio<String>(
+                  value: 'en',
+                  groupValue: currentLanguage,
+                  onChanged: (value) {
+                    if (value != null) {
+                      localeCubit.changeLocale(languageCode: value);
+                      Navigator.of(dialogContext).pop();
+                    }
+                  },
+                ),
+                onTap: () {
+                  localeCubit.changeLocale(languageCode: 'en');
                   Navigator.of(dialogContext).pop();
-                }
-              },
-            ),
-            RadioListTile<String>(
-              title: Text(l10n.languageSpanish),
-              subtitle: Text(l10n.languageSpanishNative),
-              value: 'es',
-              groupValue: currentLanguage,
-              onChanged: (value) {
-                if (value != null) {
-                  localeCubit.changeLocale(languageCode: value);
+                },
+              ),
+              ListTile(
+                title: Text(l10n.languageSpanish),
+                subtitle: Text(l10n.languageSpanishNative),
+                leading: Radio<String>(
+                  value: 'es',
+                  groupValue: currentLanguage,
+                  onChanged: (value) {
+                    if (value != null) {
+                      localeCubit.changeLocale(languageCode: value);
+                      Navigator.of(dialogContext).pop();
+                    }
+                  },
+                ),
+                onTap: () {
+                  localeCubit.changeLocale(languageCode: 'es');
                   Navigator.of(dialogContext).pop();
-                }
-              },
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -93,48 +107,68 @@ class SettingsPage extends StatelessWidget {
 
     showDialog(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.theme),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RadioListTile<ThemeMode>(
-              title: Text(l10n.themeLight),
-              secondary: const Icon(Icons.light_mode),
-              value: ThemeMode.light,
-              groupValue: currentTheme,
-              onChanged: (value) {
-                if (value != null) {
-                  themeCubit.changeThemeMode(mode: value);
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Text(l10n.theme),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: Text(l10n.themeLight),
+                leading: Radio<ThemeMode>(
+                  value: ThemeMode.light,
+                  groupValue: currentTheme,
+                  onChanged: (value) {
+                    if (value != null) {
+                      themeCubit.changeThemeMode(mode: value);
+                      Navigator.of(dialogContext).pop();
+                    }
+                  },
+                ),
+                trailing: const Icon(Icons.light_mode),
+                onTap: () {
+                  themeCubit.changeThemeMode(mode: ThemeMode.light);
                   Navigator.of(dialogContext).pop();
-                }
-              },
-            ),
-            RadioListTile<ThemeMode>(
-              title: Text(l10n.themeDark),
-              secondary: const Icon(Icons.dark_mode),
-              value: ThemeMode.dark,
-              groupValue: currentTheme,
-              onChanged: (value) {
-                if (value != null) {
-                  themeCubit.changeThemeMode(mode: value);
+                },
+              ),
+              ListTile(
+                title: Text(l10n.themeDark),
+                leading: Radio<ThemeMode>(
+                  value: ThemeMode.dark,
+                  groupValue: currentTheme,
+                  onChanged: (value) {
+                    if (value != null) {
+                      themeCubit.changeThemeMode(mode: value);
+                      Navigator.of(dialogContext).pop();
+                    }
+                  },
+                ),
+                trailing: const Icon(Icons.dark_mode),
+                onTap: () {
+                  themeCubit.changeThemeMode(mode: ThemeMode.dark);
                   Navigator.of(dialogContext).pop();
-                }
-              },
-            ),
-            RadioListTile<ThemeMode>(
-              title: Text(l10n.themeSystem),
-              secondary: const Icon(Icons.brightness_auto),
-              value: ThemeMode.system,
-              groupValue: currentTheme,
-              onChanged: (value) {
-                if (value != null) {
-                  themeCubit.changeThemeMode(mode: value);
+                },
+              ),
+              ListTile(
+                title: Text(l10n.themeSystem),
+                leading: Radio<ThemeMode>(
+                  value: ThemeMode.system,
+                  groupValue: currentTheme,
+                  onChanged: (value) {
+                    if (value != null) {
+                      themeCubit.changeThemeMode(mode: value);
+                      Navigator.of(dialogContext).pop();
+                    }
+                  },
+                ),
+                trailing: const Icon(Icons.brightness_auto),
+                onTap: () {
+                  themeCubit.changeThemeMode(mode: ThemeMode.system);
                   Navigator.of(dialogContext).pop();
-                }
-              },
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
