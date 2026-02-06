@@ -11,7 +11,6 @@ class RouterCubit extends Cubit<RouterState> {
     emit(RouterCheckAuthRequested());
 
     try {
-      await Future.delayed(const Duration(seconds: 1));
       final isLogged = await routerUseCase.execute();
       emit(RouterCheckAuthSuccess(isLogged));
     } catch (e, stackTrace) {
