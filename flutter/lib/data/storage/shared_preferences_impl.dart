@@ -12,7 +12,7 @@ class SharedPreferencesImpl implements PreferencesRepository {
   }
 
   @override
-  String? getString({required String key}) {
+  Future<String?> getString({required String key}) async {
     return _prefs.getString(key);
   }
 
@@ -22,7 +22,7 @@ class SharedPreferencesImpl implements PreferencesRepository {
   }
 
   @override
-  bool containsKey({required String key}) {
+  Future<bool> containsKey({required String key}) async {
     return _prefs.containsKey(key);
   }
 }
